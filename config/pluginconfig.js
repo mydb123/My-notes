@@ -11,20 +11,20 @@ module.exports = {
   '@vuepress/google-analytics': {//谷歌流量访问分析插件
     'ga': 'UA-162716105-1' 
   },
-//   'vuepress-plugin-auto-sidebar': {//自动生成侧边栏
-//     titleMode: "uppercase"
-//   },
+  'vuepress-plugin-auto-sidebar': {//自动生成侧边栏
+    titleMode: "uppercase"
+  },
   '@vuepress/last-updated' : {//最后更新时间插件
     transformer: (timestamp, lang) => {
       moment.locale('zh-CN')
       return moment(timestamp).format('YYYY-MM-DD HH:mm:ss')
     }
   },
-//   '@vuepress/medium-zoom': {
-//     selector: '.content__default img',
-//     options: {
-//       margin: 16
-//     }
-//   }
+  '@vuepress/medium-zoom': {
+    selector: '.content__default img',
+    options: {
+      margin: 16
+    }
+  }
 
 }
