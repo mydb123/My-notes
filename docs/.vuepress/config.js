@@ -2,8 +2,8 @@ const head = require('../../config/headconfig.js')
 const nav = require('../../config/navconfig')
 const plugins = require('../../config/pluginconfig.js')
 module.exports = {
-    title:"znote",
-    description: 'znote',
+    title:"notes",
+    description: 'notes',
     head: head,
     plugins: plugins,
     base:'/My-notes/',
