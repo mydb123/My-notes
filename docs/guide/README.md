@@ -13,6 +13,15 @@
 
 所以这就是个个人笔记而已。
 
+##项目的启动步骤
+1.必须安装git和node.js(npm)
+2.配置密钥和公钥<https://mydb123.github.io/My-notes/tools/git/g-github.html#ssh-key>
+3.创建放项目的文件夹在运行 (git init)
+4.在克隆项目(git clone)
+5.在运行npm i 下载运行用的包
+6.在启动项目(npm run docs:dev)
+7.上传<https://mydb123.github.io/My-notes/tools/git/g-github.html#ssh-key>
+
 
 ## 联系方式
 - QQ:1726379333
