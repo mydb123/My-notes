@@ -15,7 +15,8 @@ module.exports = [
     },
     { 
         text: '移动端', items: [    
-            { text: '小程序', link: '/mobile/applets/'}
+            { text: '小程序', link: '/mobile/applets/'},
+            { text: 'uni-app', link: '/mobile/application/'}
         ]
     },
     { 
