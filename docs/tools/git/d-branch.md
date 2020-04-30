@@ -75,11 +75,8 @@ UU 1.txt
 ```
 手动解决冲突。
 ```
-<<<<<<< HEAD
 master主分支修改11行
-=======
 change_site分支中修改11行
->>>>>>> change_site
 ```
 编辑完冲突后，重新提交`git commit -am '冲突解决'`。
 
