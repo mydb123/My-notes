@@ -1,6 +1,7 @@
 ---
-titl:  全局配置和页面组建
+title: 全局配置和组件
 ---
+
 ## globalStyle全局配置外观
 ```js
 // 在pages文件下
