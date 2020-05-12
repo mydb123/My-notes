@@ -20,8 +20,9 @@ Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型�
 ```js
 .box {
   flex-direction: row | row-reverse | column | column-reverse;
-}[图片](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png)
+}
 ```
+[图片](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png)
 1. row（默认值）：起点在左端, 从左到右
 2. row-reverse：起点在右端, 从右到左
 3. column：起点在上端,从上到下

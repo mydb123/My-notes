@@ -33,3 +33,20 @@ title: 全局配置和组件
 * mode;(图片裁剪、缩放的模式)
 * lazy-load;(false;图片懒加载。只针对page与scroll-view下的image有效)
 * fade-show;(true;图片显示动画效果)
+
+### uni-app的生命周期
+1. onLaunch (当uni-app 初始化完成时触发（全局只触发一次）)
+2. onShow (当 uni-app 启动，或从后台进入前台显示)
+3. onHide (当 uni-app 从前台进入后台)
+
+## 下拉刷新
+1. 需要在 pages.json 里，找到的当前页面的pages节点，并在 style 选项中开启 enablePullDownRefresh,刷新功能
+2. 
+```js
+onPullDownRefresh(){
+	setTime(()=>{
+		//这里写需要加载的数据
+		nui.stopPUllDowRefresh()
+	},1000)
+}
+```
