@@ -32,7 +32,7 @@ title: JSX语法
      }
      ```
 3. **在 jsx 中混合写入 js 表达式**：在 jsx 语法中，要把 JS代码写到 `{ }` 中
-
+    **其中的key需要加,加给最外面的元素** 
    + 渲染数字
     ```js
      //index.js
@@ -84,12 +84,22 @@ title: JSX语法
      let arrstr = ["费兰克","乔巴","路飞","索隆","香克斯","艾斯","娜美","布鲁克"]
      const  namearr = []
      arrstr.forEach(item=>{
-        const  temp=  <h5>{item}</h5>
+        const  temp=  <h5 key="item.index" >{item}</h5>
         namearr.push(temp)
      })
         // const a = arrstr.map(item=>{
-        //     reten  <h3>item</h3>
+        //     reten  <h3 key="item.index">item</h3>
         // }) 
         //ReactDOM.render(<div>{a}</div>, document.getElementById('app'))
      ReactDOM.render(<div>{namearr}</div>, document.getElementById('app'))
     ```
+## 注意
+1. jsx中注释怎么写
+ 在React中注释`{/*什么什么内容*/}`
+```js 
+{
+  //这是注释
+}
+```
+2. **为 jsx 中的元素添加class类名**：需要使用`className` 来替代 `class`；`htmlFor`替换label的`for`属性
+
