@@ -32,7 +32,7 @@ title: 组件创建和传值
     return <div>这是 Hello 组件 --- {props.name} --- {props.age} --- {props.gender}</div>
   }
   ```
-## es6新特性
+## es6...的新特性
 ```js
 var a = {
     name:"张三",
@@ -56,9 +56,10 @@ console.log(b)
 4. 注意：组件的名称首字母必须是大写  ​
 
 ## 组件放置于单独文件
-1. 在src文件下创建一个组件components`Hello.jsx` *想让jsx文件正常解析的话确保webpack.config.js中有jsx这一项*
+1. 在src文件下创建一个组件components`Hello.jsx` (*想让jsx文件正常解析的话确保webpack.config.js中有jsx这一项*) 
      + 创建好了之后要在文件内部暴露出去`export default Hell` 这文件夹中必须导入React
      + 文件需要导入`import Hell from 路径` 这里必须加后缀名
+<img :src="$withBase('/front/react/公用模块.png')">
 2. 在文件webpack.confing.js配置文件中和mode,module平级的地方加上
     ```js
         resolve:{

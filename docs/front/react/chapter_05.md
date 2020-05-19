@@ -1,6 +1,28 @@
 ---
 title: class关键字
 ---
+
+### 最基础的组件基本结构
+```js
+  //如果需要使用class定义组件，必须让自己的组件，继承来自React.Component
+  class 组件名称 extends React.Component{
+      //在组件内部必须要有render()函数
+    render(){
+      //render函数中必须返回合法的jsx虚拟的DOM结构
+      return <div>这是class基本组件</div>
+    }
+  }
+```
+```js
+  import React from 'react'
+  class Movie extends React.Component{
+    render(){
+      return <div>这是class基本组件</div>
+    }
+  }
+  ReactDOM.render(<Movie></MOvie> document.getElementById('app'))
+```
+
 ## 第二种创建组件的方式
 > class关键字创建组件   
 > ES6中class关键字,是实现面向对象编程的新形式
@@ -44,6 +66,7 @@ title: class关键字
     //在 class 类中,可以使用extends 关键字,实现子类继承父类
     //语法 class子类extends父类{}
     class American extends person{
+
         // constructor(a,b){
         //     this.name = a
         //     this.age = b
@@ -55,6 +78,7 @@ title: class关键字
     
     //这里是中国人
     class Chinese(){
+
         // constructor(a,b){
         //     this.name = a
         //     this.age = b
@@ -62,4 +86,51 @@ title: class关键字
     }
     const a2 = new Chinese('张三',18)
     console.log(a2)
+```
+## super的使用
+1. 为什么要在constructor 中调用 super
+    ```md
+      因为,如果一个子类,通过`extends` 关键字继承了父类,那么在子类的`constructor`构造函数中,必须优先调用 `super()`
+    ```
+2. super 是什么
+    ```md
+    super是一个函数,而且他是父类的构造器,子类中的`super`,其实就是父类中这个`constructor`构造器的一个引用
+    ```
+3. 为什么调用`super()`之后,a1实例的name和age 都变成了underfined了
+    ```md
+    传的时候将new一直传给子类的`constructor`在从`constructor`传给`super`
+    ```
+
+## class语法规范
+```js
+
+ class Chinese extends person{
+
+        constructor(a,b,c){
+          //语法规范： 在子类中this只能在super()的后面使用
+          super()
+            this.name = a
+            this.age = b
+            this.idnumber =c
+        }
+    }
+    const a2 = new Chinese('张三',18,'13956650000')
+    console.log(a2)
+```
+
+## props传参
+```js
+class  Movie extends React.component{
+  //render函数的作用是渲染当前组件对应的虚拟dom元素
+  render(){
+    //在class关键字创建的组件中，如果想使用外界传过来的props参数，直接通过this.props.***可以直接访问
+    return<div>这里是movie组件-----{this.props.name}</div>
+  }
+}
+cosnt user = {
+  age:"ls",
+  name:15,
+  zender:"55"
+}
+React.reder(<Movie name={user.name} age={user.age}></Movie>,document.getElementByID('app'))
 ```
