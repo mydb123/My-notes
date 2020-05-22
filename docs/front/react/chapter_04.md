@@ -69,6 +69,15 @@ console.log(b)
             }
         }
     ```
+
+    ```js
+    mode:{ //所有第三方 模块的配置规则
+    rules:{ //第三方配置规则
+      {test:/\.js|jsx$, use:'babel-loader',exclude:/node_modules//} //这里千万得记住添加exclude排除项
+      {test:/\.css$/,use:['style-loader','css-loader']} //打包处理css样式第三方loader
+    }
+    }
+    ```
 ### @符号的解释
 注意: **项目路径中的@符号主要是表示根目录的src这一层目录**
 
