@@ -107,7 +107,7 @@ $ git push origin master
 ```
 ## 基本命令
 git init //创建仓库    
-git glone //拉代码   
+git clone //拉代码   
 git add . //推送  
 git status -s //查询是否有推送内容  
 git commit -m '备注信息' //备注信息  
