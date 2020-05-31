@@ -102,7 +102,7 @@ export default {
 <img :src="$withBase('/front/vue/axios的使用.jpg')">
 
 ## 请求
-<img :src="$withBase('/front/vue/axios的使用.jpg')">
+<img :src="$withBase('/front/vue/发送请求.jpg')">
 
 ## 将登陆token储存到sessionStorage里
 <img :src="$withBase('/front/vue/储存token.jpg')">
