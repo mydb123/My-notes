@@ -28,7 +28,7 @@ title: 起始
 2. .prevent阻止默认行为
 ```js
     //这里我们组织默认行为可以防止a标签跳转到百度去
-<a @click.prevent="function">百度</a>
+<a @click.prevent="function" >百度</a>
 ```
 
 3. .keyup.enter 回车键
