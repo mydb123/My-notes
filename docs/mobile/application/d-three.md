@@ -30,7 +30,7 @@ url: './detail/loginfoDetail?id='+e.id+'&module='+e.module
 </script>
 ```
 5. 传值与接受值的时候需要转换
-JSON.stringify() 方法用于将 JavaScript 值转换为 JSON 字符串。
+**JSON.stringify()** 方法用于将 **JavaScript** 值转换为 **JSON** 字符串。
 ```js
 godevicefull(e) {
     let detail = {
@@ -45,7 +45,7 @@ godevicefull(e) {
 },
 ```
 6. 接受值的适合需要转换
-我们可以使用 JSON.parse() 方法将数据转换为 JavaScript 对象。
+我们可以使用 **JSON.parse()** 方法将数据转换为 **JavaScript** 对象。
 ```js
 onLoad(option) {
     this.deviceDetail= JSON.parse(option.deviceDetail);//这里接受时需要转换成js对象模式才能使用

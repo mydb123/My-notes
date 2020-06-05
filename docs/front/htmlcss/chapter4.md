@@ -42,7 +42,7 @@ title: H5
     .nav::after;/*后面*/
 ```
 ## css不撑大盒子
-+ `box-sizing:content-box`给父元素添加  
++ `box-sizing:border-box`给父元素添加  
 
 + `filter:blur(5px)`图像模糊使用
 

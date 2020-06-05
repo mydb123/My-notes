@@ -136,3 +136,8 @@ Vue.prototype.$message = Message
 ## 请求拦截器
 <img :src="$withBase('/front/vue/请求拦截器.jpg')">
 
+## 路由重定向
++ 这里需要在页面上写上路由占位符`<router-view></router-view>`
+<img :src="$withBase('/front/vue/路由重定向.png')">
+
+
