@@ -9,4 +9,25 @@ var number = 10
 consloe.log(typeof number)
 ```
 
-## 数据类型的转换
+
+## 转换为字符串
++ toString();  `num.toString()`  
+
++ string()强制转换;  `string(num)`
+
++ 加号拼接字符串; `num+''`  
+
+
+## 转化为数字类型
++ parselnt();`parselnt("12")`  
+
++ parseFloat()有小数点;`parseFloat("12")`
+
++ Number()强制转换;`Number("12")`
+
++ js隐式转换;`"12"-0`
+
+## 转换为布尔型
++ Boolean()  
+
+ `"",0,NaN,null,undefined` **这些都会被转化为`false`其余全部转换为`true`**
