@@ -5,9 +5,10 @@ module.exports = [
         text: '前端', items: [
             { text: 'HtmlCss', link: '/front/htmlcss/' },
             { text: 'JavaScript', link: '/front/javascript/' },
+            { text: 'WebAPI', link: '/front/webapi/' },
             { text: 'Vue', link: '/front/vue/' },
-            { text: 'React', link: '/front/react/' },
-            { text: 'WebAPI', link: '/front/webapi/' }
+            { text: 'React', link: '/front/react/' }
+            
         ]
     },
     { 
