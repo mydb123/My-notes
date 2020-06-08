@@ -7,7 +7,7 @@ module.exports = [
             { text: 'JavaScript', link: '/front/javascript/' },
             { text: 'Vue', link: '/front/vue/' },
             { text: 'React', link: '/front/react/' },
-            { text: 'WebAPI', link: '/front/webapi/' },
+            { text: 'WebAPI', link: '/front/webapi/' }
         ]
     },
     { 

@@ -1,7 +1,12 @@
 ---
-title: ES6
+title: 变量
 ---
+浏览器本身不会执行js代码,而是通过内置的js引擎来执行js代码,**js引擎执行代码时会逐行解释每一行代码**
 
-## export和export default的区别
-1. 一个文件或模块中，`export、import`可以有多个，`export default`仅有一个
-2. 通过`export`方式导出，在导入时要加`{ }`，`export default`则不需要
+## 获取数据类型(typeof)
+```js
+var number = 10
+consloe.log(typeof number)
+```
+
+## 数据类型的转换
