@@ -51,6 +51,9 @@ title: 运算符
 ```
 
 ## switch使用
+1. 开发当中我们经常将表达式写成变量
+2. 表达式必须和value1是全等的`===`才可以
+2. break 如果当前case没有break则不会推出switch继续执行下一个case
 ```js
     switch(表达式){
         case value1;
@@ -76,3 +79,5 @@ title: 运算符
             consloe.log("没有匹配结果")
     }
 ```
++ 当分支比较少的时候,if....else执行比较好
++ 当分支比较多的时候,switch执行比较好,而且结构清晰
