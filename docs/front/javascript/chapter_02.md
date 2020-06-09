@@ -1,5 +1,5 @@
 ---
-title: 运算符
+title: 运算符/循环
 ---
 
 ## 递增和递减运算符
@@ -81,3 +81,35 @@ title: 运算符
 ```
 + 当分支比较少的时候,if....else执行比较好
 + 当分支比较多的时候,switch执行比较好,而且结构清晰
+
+## for循环
+```js
+    //  for循环基本写法 
+    for(var i=0;i<100;i++){
+        
+    }
+```
+1. 如何在js代码中打断点
+<img :src="$withBase('/front/javascript/打断点.jpg')">
+2. 双重for循环
+<img :src="$withBase('/front/javascript/双重for循环.jpg')">
+
+## while循环
+```js
+while (num<=100){
+    consle.log("localhost")
+    num++
+}
+```
+<img :src="$withBase('/front/javascript/while.jpg')">
+
+## do....while循环
+<img :src="$withBase('/front/javascript/dowhile.jpg')">
+
+## continue关键字
+`continue`关键字用于跳出本次循环,继续下一个循环
+<img :src="$withBase('/front/javascript/continue.jpg')">
+
+## break 关键字
+`break 关键字`用于立即跳出整个循环(循环结束)
+<img :src="$withBase('/front/javascript/break.jpg')">
