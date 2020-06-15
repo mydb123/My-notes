@@ -66,3 +66,4 @@ Visual Studio Code是一个轻量级但功能强大的源代码编辑器，可�
 3. Chinese
 4. Vetur
 5. Easy LESS
+6. Material Icon Theme
