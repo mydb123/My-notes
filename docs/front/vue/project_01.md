@@ -3,27 +3,27 @@ title: 项目
 ---
 
 ## 起始
-1. 打开cmd 输入Vue ui
+1. 打开`cmd` 输入`Vue ui`
 2. 一步一步后到功能面板
-3. 需要的bable, Router,使用配置文件
-4. 配置: 第一个关上 第二个选Standard config 
-5. 插件->添加插件->vue-cli-plugin-element安装 
+3. 需要的`bable`, `Route`r,使用配置文件
+4. 配置: 第一个关上 第二个选`Standard config `
+5. 插件->添加插件->`vue-cli-plugin-element`安装 
 6. 依赖->安装依赖-axios
 
 ## 登录退出
 1. 登录状态保持
 
-如果服务器和客户端同源，建议可以使用cookie或者session来保持登录状态
+如果服务器和客户端同源，建议可以使用`cookie`或者`session`来保持登录状态
 
-如果客户端和服务器跨域了，建议使用token进行维持登录状态。
+如果客户端和服务器跨域了，建议使用`token`进行维持登录状态。
 
 2. 登录逻辑：
 
 在登录页面输入账号和密码进行登录，将数据发送给服务器
 
-服务器返回登录的结果，登录成功则返回数据中带有token
+服务器返回登录的结果，登录成功则返回数据中带有`token`
 
-客户端得到token并进行保存，后续的请求都需要将此token发送给服务器，服务器会验证token以保证用户身份。
+客户端得到`token`并进行保存，后续的请求都需要将此`token`发送给服务器，服务器会验证`token`以保证用户身份。
 
 + 打开App.vue(根组件)，将根组件的内容进行操作梳理(template中留下根节点，script中留下默认导出，去掉组件，style中去掉所有样式)
 ```js
@@ -45,10 +45,10 @@ title: 项目
 ## 创建文件重定向
 <img :src="$withBase('/front/vue/login.jpg')">
 
-+ 安装依赖less或者是scss
++ 安装依赖`less`或者是`scss`
 + 定义全局样式
 <img :src="$withBase('/front/vue/全局样式.jpg')">
-+ 为input框绑定v-model双项绑定
++ 为`input`框绑定`v-model`双项绑定
 ```js
 <script>
 export default {
@@ -70,7 +70,7 @@ export default {
 
 ## 添加表单验证的步骤
 
-1. 给`<el-form></el-form>`添加属性:rules="rules"，rules是一堆验证规则，定义在script、中
+1. 给`<el-form></el-form>`添加属性 **:rules="rules"**，rules是一堆验证规则，定义在script、中
 
 2. 
 ```js

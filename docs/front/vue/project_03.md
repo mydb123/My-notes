@@ -12,12 +12,12 @@ title: 项目(3)
 <img :src="$withBase('/front/vue/删除商品.jpg')">
 
  ## 通过编程式导航跳转页面
-<img :src="$withBase('/front/vue/ 编程时跳转.jpg')">
+<img :src="$withBase('/front/vue/编程时跳转.jpg')">
 
 ## router-link的用法
-1. <router-link :to="{path:'/test',query: {name: id}}">跳转</router-link>(id是参数)使用：this.$route.query.id  
+1. `<router-link :to="{path:'/test',query: {name: id}}">`跳转`</router-link>`(id是参数)使用：this.$route.query.id  
 
-2. <router-link :to="'/test/'+id">跳转</router-link>(id是参数)  
+2. `<router-link :to="'/test/'+id">`跳转`</router-link>`(id是参数)  
 
 注意：router-link中链接如果是‘/’开始就是从根路由开始，如果开始不带‘/’，则从当前路由开始
 

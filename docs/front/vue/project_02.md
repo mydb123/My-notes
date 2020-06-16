@@ -12,7 +12,7 @@ title: 项目(2)
 <img :src="$withBase('/front/vue/状态开关.jpg')">
 
 ### Vue中插槽-----特殊特性slot、slot-scope与指令v-slot的使用方法
-1. slot、slot-scope已经被废弃推荐使用vue2.6.0中的v-slot；但是这边还是对新旧方法对做一下使用说明。
+1. `slot`、`slot-scope`已经被废弃推荐使用vue2.6.0中的**v-slot**；但是这边还是对新旧方法对做一下使用说明。
 2. 具名插槽：给slot起个名字
 `slot-scope使用：`
 ```js
