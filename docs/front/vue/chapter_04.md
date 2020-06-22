@@ -179,5 +179,20 @@ Getter用于对Store中的数据进行加工处理形成新的数据
         </div>
     </template>
 ```
-## State
+## 项目问题
++ axios是异步的所以得定义到actions
+```js
+    //定义
+    getList(context){
+        axios.get("路径").then(({data})=>{
+            console.log("data")
+        })
+    }
+```
+```js
+    //调用
+    created(){
+        this.$store.dispath("getList")
+    }
+```
 
