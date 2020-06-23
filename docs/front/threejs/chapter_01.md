@@ -7,84 +7,109 @@ title: three
 ## 案例分段解释
 ```js
     <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width='device-width', initial-scale=1.0">
-            <title>Three.js案例</title>
-            <style>
-                body{
-                    margin: 0;
-                }
-                canvas{
-                    width: 100%;
-                    height: 100%;
-                    display: block;
-                }
-            </style>
-        </head>
-        <body onload="init()">
-            <!-- onload比ready执行晚一点 -->
-            
-            <!-- cdn引入/也可以下载引入 -->
-        <script src="https://cdn.bootcss.com/three.js/92/three.js"></script>
-        <script>
-            //声明全局变量
-            //渲染器,    相机,场景,   物体,  材质
-            var renderer,camera,scene,geometry,material,mesh;
-            //初始化渲染器
-            function initRenderer(){
-                renderer = new THREE.WebGLRenderer();//实例化渲染器
-                renderer.setSize(window.innerWidth,window.innerHeight);//设置宽高
-                document.body.appendChild(renderer.domElement);//添加到dom结构里
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width='device-width', initial-scale=1.0">
+    <title>Three.js案例</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        canvas{
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body onload="init()">
+    <!-- onload比ready执行晚一点 -->
+    
+    <!-- cdn引入/也可以下载引入 -->
+<script src="https://cdn.bootcss.com/three.js/92/three.js"></script>
+<!-- fpx插件 -->
+<script src="https://www.wjceo.com/lib/js/libs/stats.min.js"></script> 
+<!-- 调试工具插件 -->
+<script src="https://cdn.bootcss.com/dat-gui/0.7.1/dat.gui.min.js"></script> 
 
-            //初始化场景
-            function initScene(){
-                scene = new THREE.Scene();//实例化场景
-            }
+<script>
+    //声明全局变量
+      //渲染器,    相机,场景,   物体,  材质,    网格,   fps
+    var renderer,camera,scene,geometry,material,mesh, stats;
 
-            //初始化相机
-            function initCamera(){
-                camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight, 0.1, 200);//实例化相机
-                camera.position.set(0,0,15); //x,y,z
-            }
-
-            //创建物体
-            function initMesh(){
-                geometry = new THREE.BoxGeometry(2, 2, 2);//创建几何体
-                material = new THREE.MeshNormalMaterial();//创建材质,七彩材质(自带的)
-
-                mesh = new THREE.Mesh(geometry,material);//创建网格组合起来
-                scene.add(mesh); //将网格添加到场景
-            }
-
-            //运动动画
-            function animate(){
-                requestAnimationFrame(animate);//循环调用此函数
-
-                mesh.rotation.x +=0.01;//每帧网格模型的沿着x轴旋转0.01弧度
-                mesh.rotation.y +=0.02;//每帧网格模型的沿着y轴旋转0.02弧度
-
-                renderer.render(scene,camera);//渲染界面
-            }
+    //性能插件,监听fps
+    stats = new Stats();
+    document.body.appendChild(stats.dom)
 
 
+    //初始化渲染器
+    function initRenderer(){
+        renderer = new THREE.WebGLRenderer();//实例化渲染器
+        renderer.setSize(window.innerWidth,window.innerHeight);//设置宽高
+        document.body.appendChild(renderer.domElement);//添加到dom结构里
+    }
+
+    //初始化场景
+    function initScene(){
+        scene = new THREE.Scene();//实例化场景
+    }
 
 
-            //初始化函数,页面加载完成时调用
-            function init(){
-                //3d三要素
-                initRenderer(); //渲染
-                initScene(); //场景
-                initCamera(); //相机
+    //初始化相机
+    function initCamera(){
+        camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight, 0.1, 200);//实例化相机
+        camera.position.set(0,0,15); //x,y,z
+    }
 
-                initMesh(); //物体
+    //创建物体
+    function initMesh(){
+        geometry = new THREE.BoxGeometry(2, 2, 2);//创建几何体
+        material = new THREE.MeshNormalMaterial();//创建材质,七彩材质(自带的)
 
-                animate(); //旋转,动画
-            }
-        </script>
-        </body>
-    </html>
+        mesh = new THREE.Mesh(geometry,material);//创建网格组合起来
+        scene.add(mesh); //将网格添加到场景
+    }
+
+    //运动动画
+    function animate(){
+        requestAnimationFrame(animate);//循环调用此函数
+
+        mesh.rotation.x +=0.01;//每帧网格模型的沿着x轴旋转0.01弧度
+        mesh.rotation.y +=0.02;//每帧网格模型的沿着y轴旋转0.02弧度
+
+
+        stats.updated(); //fps使用
+        renderer.render(scene,camera);//渲染界面
+    }
+    //创建环境光
+    function initLight(){
+        var light = new THREE.DirectionalLight(0xffffff);//添加了一个平行光
+        light.position.set(20,50,50);//设置光的位置
+        scene.add(light);//添加到场景
+
+        //添加一个全局环境光
+        scene.add(new THREE.AmbientLight(0x222222));
+    }
+
+
+
+    //初始化函数,页面加载完成时调用
+    function init(){
+        //3d三要素
+        initRenderer(); //渲染
+        initScene(); //场景
+        initCamera(); //相机
+
+        initLight();//环境光
+        initMesh(); //物体
+
+        animate(); //旋转,动画
+    }
+    
+</script>
+</body>
+</html>
+
 ```
 使用`Three.js`显示创建内容,我们必须需要三大件: 渲染器,相机和场景.相机获取到的场景内显示的内容,然后再通过渲染器渲染到画布上
 
@@ -340,3 +365,36 @@ title: three
 `http://www.webgl3d.cn/threejs/docs/#api/zh/objects/Points`
 
 ## 导入json模型
+1. 先从官方提供的编译器`export object`导出
+2. 
+```js
+    //创建物体
+    function initMesh(){
+       let loader = new THREE.ObjectLoader();//实例化ObjectLoader对象
+
+        loader.load("导入上面导出的路径",function (group){
+            scene.add(group)
+        })
+        
+    }
+```
+2. 可能会出现跨域问题可以安装插件`Live.Server`
+
+## gitf格式导入
+`https://sketchfab.com/3d-models?date=week&features=downloadable&sort_by=-likeCount&cursor=bz0xJnA9MTY%3D`3d图像
+下载点击图片有一个`Download 3D Model`点击就好了
+`https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/GLTFLoader.js`下载加载器
+插件显示gitf的`fitf tools`
+
+`<script src="导入下载包的路径GLTFLoader.js"></script> `
+ ```js
+    //创建物体
+    function initMesh(){
+        var loader = new THREE.GLTFLoader();//实例化ObjectLoader对象
+        loader.load("导入上面导出的路径.gltf的",function (group){
+            gltf.scene.scale.set(10,10,10);
+            scene.add(gltf.scene);
+        })
+        
+    }
+```
