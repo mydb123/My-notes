@@ -55,7 +55,7 @@ title: 作用域/对象/数组/字符串
 |      getMinutes()      |          获取当前分钟            |       dateObj.getMinutes()     |
 |      getSeconds()      |          获取当前秒数            |       dateObj.getSeconds()     |
 
-## Array对象
+## Array数组
 ```js
     var fruits = ['Apple', 'Banana'];
     var arr = new Array(); //创建了一个空数组
