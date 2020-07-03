@@ -33,7 +33,8 @@ module.exports = [
         text: '其它', items: [    
             { text: 'Utils', link: '/others/utils/' },
             { text: '随心记', link: '/others/recording/' },
-            { text: '面试宝典', link: '/others/interview/' }
+            { text: '面试宝典', link: '/others/interview/' },
+            { text: 'java配置', link: '/others/javadeploy/' },
         ]
     },
     { 
