@@ -79,6 +79,36 @@ title: 运算符/循环
             consloe.log("没有匹配结果")
     }
 ```
+```js
+    var arrLngAndLatDoor,arrLngAndLatFloor,path1,img;
+        switch(true){
+        case marker.id == '#1' && p == 'assets/1.jpg':
+            //切换的全景图片路径
+            path1 = 'assets/6.jpg';
+            arrLngAndLatDoor = []; //门上的经纬度坐标数组
+            arrLngAndLatFloor = [
+                {longitude:0.1,latitude:-0.20},
+                {longitude:-1.55,latitude:-0.08},
+                {longitude:1.4,latitude:-0.10}
+            ];
+            img = '';//家咋动画
+            skipTo(path1,arrLngAndLatDoor,arrLngAndLatFloor,img,markerImgSrc);
+        break;
+
+        case marker.id == '#0' && p == 'assets/6.jpg':
+            path1 = 'assets/1.jpg';
+            arrLngAndLatDoor = [{longitude:-0.40,latitude:0.25}];
+            arrLngAndLatFloor = [ 
+                {longitude:0.02,latitude:-0.08},
+                {longitude:0.08,latitude:-0.08},
+            ];
+            img = "assets/photosphere-logo.gif";
+            skipTo(path1,arrLngAndLatDoor,arrLngAndLatFloor,img,markerImgSrc);
+        break;
+    }
+```
+
+
 + 当分支比较少的时候,if....else执行比较好
 + 当分支比较多的时候,switch执行比较好,而且结构清晰
 
