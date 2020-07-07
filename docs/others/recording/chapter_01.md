@@ -54,3 +54,57 @@ title: day一
 </html>
 ```
 注: window.open("","","");第一个是必填的url。第二个是可选的，有 1：_blank(在新窗口打开) ， 2：_self(在当前窗口打开) 
+
+## Javascript中点击（click）事件的3种写法
+方法一: 
+```js
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Javascript中点击事件方法一</title>
+    </head>
+    <body>
+        <button id="btn">click</button>
+        <script type="text/javascript">
+            var btn = document.getElementById("btn");
+            btn.οnclick=function(){
+                alert("hello world");
+            }
+        </script>
+    </body>
+```
+方法二：
+```js
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Javascript中点击事件方法二</title>
+    </head>
+    <body>
+        <button id="btn">click</button>
+        <script type="text/javascript">
+            var btn = document.getElementById("btn");
+            btn.addEventListener('click',function(){
+                alert("hello wrold");
+            },false)
+        </script>
+    </body>
+    </html>
+```
+方法三：
+```js
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Javascript中点击事件方法三</title>
+        <script type="text/javascript">
+            function test(){
+                alert("hello world");
+            }
+        </script>
+    </head>
+    <body>
+        <button id="btn" οnclick="test()">click</button>
+    </body>
+    </html>
+```
