@@ -103,3 +103,10 @@ jQuery就是一个封装了很多方法的库
 1. html()`$("div").html()`
 2. text()`$("div").text()`
 3. val()`$("div").val()`
+
+## js遍历对象方法 each
+```js
+    $("div").each(function(index,domEle){
+
+    })
+```
