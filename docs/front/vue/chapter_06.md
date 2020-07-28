@@ -28,7 +28,7 @@ Vue.use(MyHttpServer)
 ```js
 <template>
   <div>
-    <button @click.prevent=handleLogin() ><button/>
+    <button @click.prevent = handleLogin() ><button/>
   </div>
 </template>
 
@@ -59,3 +59,6 @@ export default {
 </style>
 
 ```
+## 对象的解构赋值
+<img :src="$withBase('/front/vue/结构赋值1.png')">
+<img :src="$withBase('/front/vue/结构赋值2.png')">
