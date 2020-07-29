@@ -62,3 +62,8 @@ export default {
 ## 对象的解构赋值
 <img :src="$withBase('/front/vue/结构赋值1.png')">
 <img :src="$withBase('/front/vue/结构赋值2.png')">
+
+
+## 侧边栏的模块
+1. home.vue 开启路由模式的 index值->path值 `:router="true" `在你需要点击的地方加
+2. home.vue 加上router-view
