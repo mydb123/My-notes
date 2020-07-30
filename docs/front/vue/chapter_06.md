@@ -67,3 +67,39 @@ export default {
 ## 侧边栏的模块
 1. home.vue 开启路由模式的 index值->path值 `:router="true" `在你需要点击的地方加
 2. home.vue 加上router-view
+
+## vue路由传值
+<img :src="$withBase('/front/vue/请求方法1.jpg')">
+
+
+```js
+    {
+      path: '/editCardetail',
+      name: 'editCardetail',
+      component: EditCardetail
+    }, 
+```
+
+1. 使用$router.push 拼接参数传参`this.$router.push('/editCardetail?editType=add')`
+  其中editType=add即为传递的参数
+
+2. 使用name来确定匹配的路由，通过params来传递参数
+```js
+this.$router.push({
+			          name: 'editCardetail',
+			          params: {
+			            editType: add
+			          }
+			        })
+```
+
+3. 使用path来匹配路由，然后通过query来传递参数
+
+```js
+this.$router.push({
+        path: '/editCardetail',
+        query: {
+          editType: add
+        }
+      })
+```
