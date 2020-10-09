@@ -124,6 +124,24 @@ title: 运算符/循环
 2. 双重for循环
 <img :src="$withBase('/front/javascript/双重for循环.jpg')">
 
+
+## for-in
+通常情况下，我们可以用 for-in 来遍历一遍数组的内容，代码如下：
+  
+const arr = [1, 2, 3];
+let index;
+for(index in arr) {
+    console.log("arr[" + index + "] = " + arr[index]);
+}
+  
+一般情况下，运行结果如下：
+
+arr[0] = 1
+arr[1] = 2
+arr[2] = 3
+
+
+
 ## while循环
 ```js
 while (num<=100){
