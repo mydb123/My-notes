@@ -1,7 +1,7 @@
 ---
 title: day一
 ---
-## 如何实现打开一个新页面 window.open
+## 1.如何实现打开一个新页面 window.open
 ```js
     <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,7 @@ title: day一
 ```
 注: window.open("","","");第一个是必填的url。第二个是可选的，有 1：_blank(在新窗口打开) ， 2：_self(在当前窗口打开) 
 
-## Javascript中点击（click）事件的3种写法
+## 2.Javascript中点击（click）事件的3种写法
 方法一: 
 ```js
     <!DOCTYPE html>
@@ -107,4 +107,32 @@ title: day一
         <button id="btn" οnclick="test()">click</button>
     </body>
     </html>
+```
+
+## 3.border-image边框图像的使用
+1. 设置边框图片的来源  
+**border-image-source**
+
+2. 切割图片,用上右下左四刀把一个图片切成9宫格  
+**border-image-slice**
+
+3. 边框图像的宽度,如果不写默认使用盒子的边框宽.  
+**border-image-width**
+
+4. 边框图像是否平铺和拉伸
+**repeat(重复)  //   stretch(拉伸)   //  round(铺满)**
+`border-image-repeat`
+```css
+    .fu{
+        width:300px;
+        height:200px;
+        border:20px solid red;
+        /* 和img的边宽度保持一致 */
+         border-width: 167px 167px 167px 167px;
+        border-image-source:url("图片路径");
+        border-image-slice:167 167 167 167;/*量图片的边缘显示的部分*/
+        /* 一般情况设置这里的宽度和盒子每一个边的宽度一致,让盒子边框宽度跟随你这个宽度 */
+        border-image-width: 167px 167px 167px 167px;
+        box-sizing:border-box;
+    }
 ```
