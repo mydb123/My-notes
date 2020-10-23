@@ -141,7 +141,9 @@ title: day一
 
 ## 表单的全选和取消案例 
 <img :src="$withBase('/others/recording/allAndcancel.jpg')">
+  
 ```html
+
     <table>
         <tr>
             <th>
@@ -172,7 +174,9 @@ title: day一
                 <td>800</td>
             </tr>
         </tbody>
-    </tabel>
+
+    </table>
+
 ```  
 
 ```js
