@@ -136,3 +136,67 @@ title: day一
         box-sizing:border-box;
     }
 ```
+
+## for(* in *)的理解
+
+## 表单的全选和取消案例 
+<img :src="$withBase('/others/recording/allAndcancel.jpg')">
+```html
+    <table>
+        <tr>
+            <th>
+                <input type="chechbox" id="j_cbAll" checked='checked'>
+            </th>
+            <th>商品价格</th>
+        </tr>
+        <tbody id="j_tb">
+            <tr>
+                <td>
+                    <input type="chechbox">
+                </td>
+                <td>手机</td>
+                <td>800</td>
+            </tr>
+             <tr>
+                <td>
+                    <input type="chechbox">
+                </td>
+                <td>手机</td>
+                <td>800</td>
+            </tr>
+             <tr>
+                <td>
+                    <input type="chechbox">
+                </td>
+                <td>手机</td>
+                <td>800</td>
+            </tr>
+        </tbody>
+    </tabel>
+```  
+
+```js
+    //获取元素
+    var j_cbAlls = document.getElementByID('j_cbAll') //全选的选框
+    var j_tbs = document.getElementByID('j_tb').getElementsByTagName('input'); //下面所有复选框
+    
+    //注册事件
+    j_cbAlls.onclcik = function(){
+        for(var i; i<j_tbs.length;i++){
+            j_tbs[i].checked = this.checked
+        }
+    }
+    //下面全选中就显示,如果没全选就取消全选
+    for(var i; i < j_tbs.length;i++){
+        j_tbs[i].onclick = function(){
+        var  flag = true //控制全选按钮是否选中
+            for(var i ; i < j_tbs.length; i++){
+                if(!j_tbs[i].checked){
+                    flag= false;
+                    break;//推出for循环
+                }
+            }
+            j_cbAlls.checked = flag
+        }
+    }
+```

@@ -126,11 +126,11 @@ title: 运算符/循环
 
 
 ## for-in
-通常情况下，我们可以用 for-in 来遍历一遍数组的内容，代码如下：
-  
+通常情况下，我们可以用 for-in 来遍历一遍数组和对象的内容，代码如下：
+
+```js
 const arr = [1, 2, 3];
-let index;
-for(index in arr) {
+for(let index in arr) {
     console.log("arr[" + index + "] = " + arr[index]);
 }
   
@@ -140,6 +140,20 @@ arr[0] = 1
 arr[1] = 2
 arr[2] = 3
 
+```
+```js
+    var obj = {a:1, b:2, c:3};
+    
+    for (var prop in obj) {
+    console.log("obj." + prop + " = " + obj[prop]);
+    }
+
+    // Output:
+    // "obj.a = 1"
+    // "obj.b = 2"
+    // "obj.c = 3"
+
+```
 
 
 ## while循环
