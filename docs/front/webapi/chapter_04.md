@@ -3,6 +3,7 @@ title: webapi的重点和易忘点
 ---
 
 ### 本地存储
+4444 
 ## Window.sessionStorage
 1. 数据纯存在浏览器页面
 2. 页面刷新不会丢失数据
