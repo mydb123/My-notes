@@ -38,3 +38,39 @@ title: 项目(3)
 //将数组的每一项以','的方式分割
 this.addFrom.join(',')
 ```
+
+## Vue处理日期
+<img :src="$withBase('/front/vue/时间格式处理.jpg')">
+
+1. 需要写一个全局过滤来过滤时间格式
+```js
+    //在main.js
+    Vue.filter('fmtdate',(v)=>{
+        return moment(v).format(YYYY-MM-DD)
+    })
+
+    //安装依赖包
+    npm i moment
+
+    //导入包
+    import moment from "moment"
+
+```
+```html
+    <!-- 使用 -->
+    <el-table-colum>
+    <template slot-scope="scope">
+    {{scope.row.time | fmtdate }}
+    </template>
+    </el-table-colum>
+```
+
+## Vue分页功能
+1. @size-change--------------每页显示条数变化时触发
+2. @current-change-----------当前页该变触发
+3. :current-page-------------设置当前页是多少页
+4. :page-sizes="[2, 4, 6, 8]"----------每页多少条的数据数组
+5. :page-size="" -------------当前页显示多少条
+6. total------------------总条数
+5. 页面显示条数改变时发送请求刷新页面
+6. 页码改变时发送请求刷新页面

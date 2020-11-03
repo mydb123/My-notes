@@ -103,3 +103,52 @@ this.$router.push({
         }
       })
 ```
+
+
+## Vue接口传参的几种写法
++ 直接+拼接
+```js
+  // 根据id查询项目信息
+    getProjectById (id) {
+        return get(`${base.sq}/workbench/bizProject/`+id);
+    },
+```
++ 用?式拼接
+```js
+  getUserList (stationId) {
+        return get(`${base.sq}/userRelated/findUserByStation?stationId=`+stationId);
+    }
+}
+```
++ 用&多个拼接
+```js
+   loadFile(foreignId, type) {//加载
+        return get(`${base.sq}/workbench/findFileByForeignIdAndType?foreignId=` + foreignId + "&type=" + type);
+    },
+```
++ 利vue用插件qs请求
+```js
+  //分页查询（带条件）    
+    pageByExample (query,pageRequest) {
+      return get(`${base.sq}/workbench/bizDonator/pageByExample?`+qs.stringify(query) +'&'+ qs.stringify(pageRequest));
+    },
+```
+
++ ${}方式携带参数
+```js
+  async getUserList(){
+    const res = await this.$http.get(`users?query=${this.quert}&page=${this.page}`)
+  }
+```
+
++ then方法回调的写法
+```js
+  loadData(id) {
+      api.designPartner.findById(id).then(response => {
+          this.formData.id = response.id;
+          this.formData.name = response.name; //项目名称
+      }).catch(error => {
+          console.log(error);
+      });
+  }
+```

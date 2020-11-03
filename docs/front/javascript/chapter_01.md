@@ -31,3 +31,26 @@ consloe.log(typeof number)
 + Boolean()  
 
  `"",0,NaN,null,undefined` **这些都会被转化为`false`其余全部转换为`true`**
+
+## js定义function的几种方式  
+
++ 声明式函数
+1. 这个函数有一个名称 "hello", 所以我们称这个函数为命名函数。
+```js
+    function hello (firstname) {
+        console.log(`Hello ${firstname}`);
+    }
+```
+
++ 通过表达式(匿名函数)
+```js
+    const hello = function (firstname) {
+        console.log(`Hello ${firstname}`);
+    };
+```
++ es6箭头函数
+```js
+    const hello = (firstname) => {
+        console.log(`Hello ${firstname}`);
+    };
+```
