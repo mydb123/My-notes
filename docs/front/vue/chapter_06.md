@@ -140,7 +140,23 @@ this.$router.push({
     const res = await this.$http.get(`users?query=${this.quert}&page=${this.page}`)
   }
 ```
++ params携带参数
+```js
+  data(){
+    return{
+      queryInFo:{
+        name:"",
+        age:"",
+      }
+    }
+  }
 
+  async getUserList(){
+    const res = await this.$http.get('users',{params: this.queryInFo})
+}
+
+//接受var id = this.$route.params.id;
+```
 + then方法回调的写法
 ```js
   loadData(id) {
