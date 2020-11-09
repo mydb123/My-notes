@@ -62,3 +62,17 @@ title: Vue项目模块分析
 
     <my-bread levelOne="权限管理" leveTwo="权限列表"></my-bread>
 ```
+
+## 全局设置请求拦截器
+```js
+    axios.interceptors.request.use(function (config) {
+        // 在发送请求之前做些什么
+        return config;
+         
+            if(config.url !=='login'){ 
+                const AUTH_TOKEN = localStorage.getItem('token')
+                // 需要授权的api,必须在请求头加上Authorization字段的token令牌
+                config.headers['Authorization'] = AUTH_TOKEN;
+            }
+    }
+```
