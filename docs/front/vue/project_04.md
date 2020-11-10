@@ -76,3 +76,39 @@ title: Vue项目模块分析
             }
     }
 ```
+## 角色权限分配
+1. 点击对话框的确定 发送请求
+> roleId rid
+2. roleId 在打开对话框的方法中 this.roleId= role.id
+3. 
++ 获取全选的id数组(3.1)
++ 获取半选的id数组(3.2)
+4. 在js中调用el-tree的js方法
++ 给el-tree标签设置ref
++ this.$refs.ref的值tree.js方法(3.1和3.2的方法名)
++ 返回两个数组arr1和arr2
+5. es6展开运算符
+> let arr=[...arr1,...arr2]
+6. 发送请求`this.$http.post(`roles/${this.currEoleId}/rights,{rids:arr.join(',')}`)`
+7. 关闭对话框,更新视图
+
+## 路由导航守卫
++ 在home.vue中判断token很麻烦
+```js
+    
+    router.beforeEach((to,from,next)=>{
+        if(to.path === "/login"){
+            next()
+        }else{
+            const token = localStorage.getItem('token');
+            if(!token){
+                Message.warning("请先登录")
+                router.push({
+                    name:"/login"
+                })
+                return
+            }
+            next();
+        }
+    })
+```
