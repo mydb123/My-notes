@@ -61,9 +61,47 @@ Visual Studio Code是一个轻量级但功能强大的源代码编辑器，可�
 ```
 
 ## 需要安装的插件
-1. Auto Close Tag
-2. Bracket Pair Colorizer
-3. Chinese
-4. Vetur
-5. Easy LESS
-6. Material Icon Theme
+1. Auto Close Tag---------------(标签名修改)
+2. Bracket Pair Colorizer---------------(为代码中成对的括号设置不同的颜色高亮)
+3. Chinese---------------(汉化)
+4. Vetur---------------(VUE 支持)
+6. Material Icon Theme---------------(主题图标)
+6. background---------------(背景图片)
+```js
+	 "background.customImages": [
+        "C:/Users/Lenovo/Pictures/Saved Pictures/beijing.jpg",
+        // "http://pic.netbian.com/uploads/allimg/190824/212516-15666531161ade.jpg"
+    ],
+    "background.useDefault": false, // 是否使用默认图片
+    "background.style": {           // css 样式
+        "content": "''",
+
+        "pointer-events": "none",
+
+        "position": "absolute",
+
+        "z-index": "99999",
+
+        "width": "100%",
+
+        "height": "100%",
+
+        "background-position": "center",
+
+        "background-repeat": "no-repeat",
+
+        "background-size": "100%,100%",
+
+        "opacity": 0.15
+    }
+
+```
++ Code Runner---------------(在 VS Code 中快速运行代码)
+```js
+	Crtl + Alt + N 运行代码
+
+	Ctrl + Alt + M 停止运行
+
+	Ctrl + Alt + L 选择运行代码的语言
+```
++ open in browser---------------(在浏览器中打开页面文件)

@@ -121,3 +121,22 @@ title: 作用域/对象/数组/字符串
 <img :src="$withBase('/front/javascript/字符串方法1.jpg')">
 2. replace/split
 <img :src="$withBase('/front/javascript/字符串方法2.jpg')">
+
+
+## JSON的几种操作方法**JSON.parse()**和**JSON.stringify()()**
++ parse()函数
+```js
+    parse()用于将一个字符串解析成一个json对象，例如
+    var str = '{"name":"jack","age":"18"}';
+    JSON.parse(str);
+    结果是：
+    Object {name:"jack",age:"18"}
+```
++ stringify()函数
+```js
+    stringify()是从一个对象中解析出字符串，例如
+    var obj = {a:1,b:2};
+    JSON.stringify(obj);
+    结果是：
+    "{"a":1,"b":2}"
+```
