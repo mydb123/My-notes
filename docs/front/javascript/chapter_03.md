@@ -64,3 +64,8 @@ var newArr = arr.map( function(value,index){
 <img :src="$withBase('/front/javascript/函数返回值.jpg')">
 
 
+## 向一个数组里push数组
+```js
+    var showData2 = res[1].data.data.rows;//请求的新数组
+	this.showData.push(...showData2);//向showData数组push添加数据
+```
