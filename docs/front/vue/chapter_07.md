@@ -31,6 +31,7 @@ title: vue3.0(2)
         props:{
             msg: String
         },
+        // setup 函数是组合api的入口函数
         setup(){
             const data = reactive({
                 counter:2
@@ -40,4 +41,54 @@ title: vue3.0(2)
     }
     </script>
 ```
+
+## 业务逻辑的提取和分离
+```js
+    <template>
+        <div>
+            <ul>
+                <li v-for="(item,index) in state.stus" :key="index" @click="remStu(index)" >{{item.name}}-{{item.age}}-</li>
+            </ul>
+        </div>
+    </template>
+    <script>
+    import {reactive} from 'vue'
+    export default {
+        name:"App",
+        //ref只能监听简单的数据类型变化,不能监听复杂型的变化(数组和对像)
+        setup(){
+            //  ref state = reactive({
+            //     stus:[
+            //         {id:1,name:'zs',age:22},
+            //         {id:2,name:'zs',age:22},
+            //         {id:3,name:'zs',age:22},
+            //     ]
+            // });
+            // function remStu(id){
+            //     state.stus = item.stus.filter((stu,i)=>idx !==index);
+            // };
+            let{state,remStu} = UseRemoveStudent();
+            return {state,remStu}
+
+        }
+        function UseRemoveStudent(){
+            ref state = reactive({
+                stus:[
+                    {id:1,name:'zs',age:22},
+                    {id:2,name:'zs',age:22},
+                    {id:3,name:'zs',age:22},
+                ]
+            });
+            function remStu(id){
+                state.stus = item.stus.filter((stu,i)=>idx !==index);
+            };
+            return {state,remStu}
+        }
+    }
+    </script>
+```
+<img :src="$withBase('/front/vue/vue3封装.jpg')">
+
+
+
 
