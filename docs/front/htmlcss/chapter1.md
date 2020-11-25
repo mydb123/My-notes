@@ -49,3 +49,71 @@ Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型�
 3. center： 居中
 4. space-between：两端对齐，项目之间的间隔都相等(开头和结尾无空格)。
 5. space-around：每个项目两侧的间隔相等,(开头和结尾有空格)。
+
+
+
+## flex特殊写法
+|属性| 作用|
+|-----|------|
+| flex:auto;|flex: 1 1 auto |
+| flex:none;|flex: 0 0 auto |
+| flex:0%|flex: 1 1 0% |
+| flex:100px|flex: 1 1 100px |
+| flex:1|flex: 1 1 0% |
+
+`注意:flex:扩大的比例 缩小的比例 基准值`
+
+## 媒体查询
++ `max-width`最大宽度
++ `min-width`最小宽度
+
+
+  所以设置的常有：
+
+  @media screen and (min-width:1200px)
+
+  @media screen and (min-width:992px)
+
+  @media screen and (min-width:768px)
+
+  @media screen and (min-width:480px)
+```html
+  <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style>
+            .a{
+                border: 1px solid #000000;
+                width: 100%;
+                height: 400px;
+                background-color: #000000;
+            }
+
+         
+            /* 当宽度大于700的时候背景为绿色 */
+            @media only screen and (min-width: 700px) {
+                .a{
+                    background-color: green;
+                }
+            }
+            /* 当背景小于640px且大于300px的时候为红色 */
+            @media only screen and (min-width: 300px) and (max-width: 640px) {
+                .a{
+                    background-color: red;
+                }
+            }
+            /* 当背景小于200px的时候背景为蓝色 */
+            @media only screen and (max-width:200px ) {
+                .a{ 
+                    background-color: blue;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="a"></div>
+    </body>
+</html>
+```
