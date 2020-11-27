@@ -177,3 +177,56 @@ title: js高级/原型
 ## 递归
 + 简单来说就是自己调用自己到达条件返回
 <img :src="$withBase('/front/javascript/递归.jpg')">
+
+
+## 变量提升和函数提升
++ 我们知道再ES5中的var 和 function 的申明都存在又变量提升，ES6中的 let 、 const 则不存在有变量提升。
+```js
+    var a = 3
+    function fn(){
+        console.log(a);//undefined
+        var a = 4;
+
+    }
+    fn();
+
+    // 解释:因为var a变量提升但是没有定义所以打印的是没定义的a,所以为undefined
+    // var a = 3
+    // function fn(){
+    //     var a
+    //     console.log(a);//undefined
+    //      a = 4;
+
+    // }
+    // fn();
+```
+
+```js
+    // 在作用域中，不管是变量还是函数，都会提升到作用域最开始的位置，不同的是，函数的提升后的位置是在变量提升后的位置之后的。
+
+    // 举个栗子：
+
+    // 下面的代码输出什么？
+
+    function foo() {
+    console.log(a);
+    var a = 1;
+    console.log(a);
+    function a() {}
+    console.log(a);
+    }
+    foo();
+
+    // 上面的代码在js眼中是这样解析的：
+
+    function foo() {
+    var a;
+    function a() {}
+    console.log(a); // a()
+    a = 1;
+    console.log(a); // 1
+    console.log(a); // 1
+    }
+    foo();
+    
+```

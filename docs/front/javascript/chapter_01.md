@@ -32,7 +32,7 @@ consloe.log(typeof number)
 
  `"",0,NaN,null,undefined` **这些都会被转化为`false`其余全部转换为`true`**
 
-## js定义function的几种方式  
+## js定义函数(function)的几种方式  
 
 + 声明式函数
 1. 这个函数有一个名称 "hello", 所以我们称这个函数为命名函数。
@@ -53,4 +53,9 @@ consloe.log(typeof number)
     const hello = (firstname) => {
         console.log(`Hello ${firstname}`);
     };
+```
++  匿名函数
+使用function关键字声明一个函数，但未给函数命名，所以叫匿名函数，匿名函数属于函数表达式，匿名函数有很多作用，赋予一个变量则创建函数，赋予一个事件则成为事件处理程序或创建闭包等等
+```js
+    function () {}
 ```
