@@ -9,6 +9,7 @@ title: zy健康项目简记
 1. 建立一个单独的api文件夹,哪个文件用接口哪个引入`import api from "@/api/index";`
 
 <img :src="$withBase('/project/project/接口统一出口.jpg')">
+<img :src="$withBase('/project/project/接口.jpg')">
 
 ```js
 //base文件
