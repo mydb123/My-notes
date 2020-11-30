@@ -32,7 +32,11 @@ title: Ajax
     }
 
 // 封装--------------------------------------------------------------
-
+    /**
+    *   @param{*} url  
+    *   @param{*} data (key1=value&key2=value2)
+    *   @param{*} success 
+    **/
      function get(url,data,success){
         //创建异步对象
         var xhr = new XMLHttpRequest();
@@ -50,13 +54,6 @@ title: Ajax
             if(xhr.readyState==4&&xhr.status ==200){
                 //调用 传入的 回调函数
                 success(xhr.responseText);
-                //普通字符串
-                console.log(xhr.responseText);
-                //JSON
-                console.log(JSON.parse(xhr.responseText));
-                //XML
-                console.log(xhr.responseXML);
-
             }
         }
 
@@ -91,3 +88,11 @@ title: Ajax
         xhr.open(data);   
     }
 ```
+
+## jq的ajax实现注册案例
+<img :src="$withBase('/front/jquery/请求.jpg')">
+
+
+## jq的ajax基本使用
+
+<img :src="$withBase('/front/jquery/请求基本.jpg')">
