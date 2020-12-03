@@ -236,3 +236,80 @@ title: js高级/原型
 + 你定义的,你没有调用,但他执行了
 + 常见的回调函数`dom事件回调函数`,`定时器回调函数`
 + ajax请求回调函数,生命周期回调函数
+
+
+## 数据类型
+1. 分类
+    * 基本数据类型
+        * String: 任意字符串
+        * Number: 任意的数字
+        * boolean: true/false
+        * undefined: undefined
+        * null: unll
+    * 对象(引用)类型
+        * Object: 任意的对象
+        * Function: 一种特别的对象(函数)(可以执行)
+        * Array: 一种特别的对象(数值下标,内部数据是有序的)
+2. 判断
+    * typeof:
+        * 可以判断: undefiend/数值/字符串/布尔值
+        * `不能判断: unll与Object  Object与array`
+    * instanceof
+        * 判断对象的具体类型
+    * ===
+        * 可以判断: undefined,null
+
+```js
+    // 1. 基本
+    // typeof返回数据类型的字符串表达
+    var a
+    console.log(a,typeof a, a==="undefined",a===undefined);//undefined 'undefined' true true
+    console.log(undefined==="undefined");
+    a = 4;
+    console.log(typeof a==="number");
+    a = 'atg';
+    console.log(typeof a=='string');
+    a = true;
+    console.log(typeof a==="coolean");
+    a = null;
+    console.log(typeof a,a===null);//'object'
+
+    console.log('-----------------');
+    
+    //2.对象
+    var b1 = {
+        b2: [1,'abc',console.log],
+        b3: function () {
+            console.log('b3');
+            renturn function (){
+                renturn 'xfzhang'
+            }
+        }
+    }
+
+    console.log(b1 instanceof Object, b1 instanceof Array);//true false
+    console.log(b1.b2 instanceof Array, b1.b2 instanceof Object);//true true
+    console.log(b1.b3 instanceof Function, b1.b3 instanceof Object);//true true
+
+    console.log(typeof b1.b3==='function');//true
+    console.log(typeof b1.b2);//'Object'
+
+    console.log(typeof b1.b2[2]==='function');
+    b1.b2[2](4);
+    console.log(b1.b3()());
+
+```
+
+## 什么叫实例
++ 实例:实例对象
++ 类型: 类型对象
+
+```js
+
+    function person (name.age){ //构造函数 类型
+        this.name = name
+        this.age = age
+    }
+    var p = new person(); //根据类型创建的实例对象
+
+```
