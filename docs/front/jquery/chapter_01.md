@@ -110,3 +110,96 @@ jQuery就是一个封装了很多方法的库
 
     })
 ```
+
+
+## jq里的map方法
+
+```js
+    /*
+        第一个参数: 要遍历的数组
+        第二个参数: 没遍历一个元素之后执行的回调函数
+        回调函数的参数:
+        第一个参数: 遍历到的元素
+        第二个参数: 遍历到的元素 
+        
+    */
+    var arr = [1,2,3,4,5];
+    $.map(arr,function (value,index){
+        console.log(value,index);// (1,0)(2,1)
+    });
+
+```
+
+## trim
+- $.trim()
+    + 作用:去除字符串两端空格
+    + 参数:需要去除空格字符串
+    + 返回值:去除空格之后的字符串
+
+
+## jQuery内容选择器
+    
++ :empty
++ :parent
++ :contains(text)
++ :has(selector)
+```js
+        
+    $(function (){
+               
+        // :empty 作用:找到既没有文本内容也没用子元素的指定元素
+        var $div = $("div:empty");
+        console.log($div);//div   
+        
+        // :parent  作用: 找到有文本内容和子元素的元素
+        var $div = $("div:parent");
+        
+        // :contains(text) 作用: 找到指定文本的的指定元素
+        var $div = $("div:contains('文本')");
+
+        
+        // :has(text) 作用: 找到指定元素的的指定元素
+        var $div = $("div:has('span')"); 
+       
+    });
+
+```
+
+## attr()/removeAttr()/prop()/removeProp()
+
+1. attr(name|pro|key.val|fn)
+- 作用: 获取或者设置属性节点的值
+    + 传递一个参数: 代表获取属性节点的值
+    + 传递两个参数: 代表设置属性节点的值
+    注意:无论找到多少个只会返回第一个
+2.  removeAttr()
+- 删除所有找到的属性节点
+
+```js
+
+    // <span class="span1" name="666"></span>
+    $(function (){
+        console.log($("span").attr("class"));
+        console.log($("span").attr("class","boss"));
+        
+        console.log($("span").reomveAttr("class"));        
+    });     
+
+```
+
+1. prop()
+2. removeProp()
+注意:具有 true 和false两个属性节点,如checked ,selected 或者disabled 使用prop(),其他使用attr()
+```js
+
+    // <span class="span1" name="666"></span>
+    // <span class="span2" name="666"></span>
+    $(function (){
+        console.log($("span").eq(0).prop("demo","it666"));//eq就是选择第一个span
+       
+        
+        console.log($("input").prop("checked"));  //true /false 
+        console.log($("input").attr("checked"));  //checked /undefined   
+    });     
+
+```
