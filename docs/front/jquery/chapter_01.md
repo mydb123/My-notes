@@ -203,3 +203,112 @@ jQuery就是一个封装了很多方法的库
     });     
 
 ```
+
+
+## scrollTop/scrollLeft
+
+1. scrollTop设定垂直滚动条值
+
+```js
+
+    $(function (){
+        //获取元素
+        //监听元素
+        btns[0].click = function(){
+            $(".css").scrollTop()
+        }
+    });
+    // 第二个同上
+
+```
+
+## jQuery绑定事件
+1. eventName(fn);
+2. on(eventName,fn);
+3. 
+注意：可以添加多个事件不会覆盖
+
+```js
+
+    $("button").click(function (){
+        alert("hello hnl");
+    })
+
+    $("button").on("click",function(){
+         alert("hello hnl");
+    })
+
+```
+
+## jQuery事件冒泡和默认行为
+
+```js
+
+    
+    $(function (){
+        // 阻止时间冒泡
+        $(".son").click(function(event){
+            alert("son");
+            // return false;
+            enent.stopPropagation()
+        });
+
+        //阻止默认行为
+        $("a").click(function(event){
+            alert("弹出框");
+            // return false;
+            enent.preventDefault()
+        });
+        
+    });
+   
+
+```
+
+
+## jQuery自定义事件
+
+```js
+
+    <div class="son"></div>
+    $(function (){
+       
+        // 1. 事件必须通过on绑定
+        // 2. 事件必须通过trigger来出发
+
+       $(".son").on("myClick",function(){
+
+           alert("son");
+       });
+       $(".son").trigger("myClick");
+    });
+
+```
+
+## 事件委托
+
+```js
+
+    // ul>li{我是第$li}*3
+    <ul>
+        <li>我是第1个li</li>
+        <li>我是第2个li</li>
+        <li>我是第3个li</li>
+    </ul>
+    <button></button>
+    $(function (){
+       
+        // 1. 事件必须通过on绑定
+        // 2. 事件必须通过trigger来出发
+
+        $("button").on("click",function(){
+          $("ul").append("我是新增1个li");
+        });
+
+        $("ul").on("li","click",function(){
+            console.log($(this),html())
+        });
+
+    });
+
+```
