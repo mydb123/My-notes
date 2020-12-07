@@ -312,3 +312,109 @@ jQuery就是一个封装了很多方法的库
     });
 
 ```
+
+
+## jQuery显示和隐藏
+
++ show  显示
++ hide  隐藏
++ toggle 切换
+
+```js
+    
+    <button>显示</button>
+    <button>隐藏</button>
+    <button>切换</button>
+
+    $(function (){
+        $("button").eq(0).click(function (){
+            $("div").show(1000,function(){
+                alert("显示动画执行完毕")
+            });
+        });
+        $("button").eq(1).click(function (){
+             $("div").hide(1000,function(){
+                alert("隐藏动画执行完毕")
+            });
+        });
+        $("button").eq(2).click(function (){
+             $("div").toggle();
+        });
+    })
+```
+
+## jQuery展开和收起
+
++ slideDown  展开
++ slideUp  收起
++ slideToggle 切换
+
+```js
+    
+    <button>展开</button>
+    <button>收起</button>
+    <button>切换</button>
+    <div></div>
+
+    $(function (){
+        $("button").eq(0).click(function (){
+            $("div").slideDown(1000,function(){
+                alert("展开")
+            });
+        });
+        $("button").eq(1).click(function (){
+             $("div").slideUp(1000,function(){
+                alert("收起")
+            });
+        });
+        $("button").eq(2).click(function (){
+             $("div").slideToggle();
+        });
+    });
+
+```
+
+## jq实现下拉菜单
+
+```js
+
+    <ul class="nav">
+        <li>一级菜单
+            // ul.sub>li{二级菜单}
+            <ul class="sub">
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+    </ul>
+
+    $(function (){
+        //监听一级菜单
+        $(".nav>li").click(function(){
+            // 拿到二级菜单
+            var $sub = $(this).childer(".sub");
+            // 让二级菜单展开
+            $sub.slideDwon(1000);
+            //拿到所有当前非二级菜单
+            var otherSub = $(this).siblings().childern(".sub");
+            // 让所有的非当前全部隐藏
+            otherSub.sildeUp(1000);
+            // 让被点的小箭头旋转
+            $(this).addClass("curent");
+            //让所有未被选中的小箭头旋转
+            $(this).siblings().removeClass("curent");
+        })
+
+
+        // 简写
+        // $(".ad").slideDwon(1000,function(){
+        //     $(".ad").fadeOut(1000,function(){
+        //         $(".ad").fadeIn(1000);
+        //     })
+        // })
+
+        $(".ad").slideDwon(10000).fadeOut(1000).fadeIn(1000);
+    });
+
+```
+
