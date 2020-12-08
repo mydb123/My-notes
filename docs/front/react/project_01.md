@@ -56,7 +56,30 @@
             )
         }
     }
+    // 简化
+    import React,{Component} from 'react';
 
+    class Home extends Component{
+        constructor(){
+            super();
+            this.state = {};
+        }
+
+        render(){
+            return(
+                
+                    <div>Home</div>
+                  
+            )
+        }
+    }
+    export default Home;
+
+```
+
+```js
+
+     //app.js
     import React from 'react'
     import {
         HashRouter,
@@ -88,8 +111,6 @@
 
     export default App;
 
-    // 在app.js里引入
-    import Home from './views/Home';
 
 ```
 
