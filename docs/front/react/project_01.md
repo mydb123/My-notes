@@ -120,3 +120,49 @@
 + 到config下webpack.config.js里搜索`loader: require.resolve('file-loader')`
 + `{test: /\.scss$/,loaders: ['style-loader','css-loader','sass-loader'],},`
 注意:"卸载node-sass ||| npm uninstall node-sass然后安装最新版本（5.0之前）|||   npm install node-sass@4.14.1"
+
+```js
+   
+    //在到config下webpack.config.js
+    //搜索sass-loader的括号后面
+    //这里得再styles文件下创建main.scss文件
+    .concat({
+        loader:"sass-resources-loader",
+        options:{
+            resources:[
+            //这里按照你的路径写
+            path.resolve(__dirname,"./../src/styles/main.scss")
+            ]
+        }
+    }),
+    ;
+
+```
+
+## antd
++ 安装ui组件
++ `npm install antd --save`
++ 按需加载`npm install babel-plugin-import --save-dev`
+
+<img :src="$withBase('/front/react/antd按需加载.jpg')">
+
+```js
+
+    //在到config下webpack.config.js
+    ["import",{libraryName:"antd",style:"css"} ],
+
+```
++ 优化
+
+```js
+
+    //为了不显示根元素的div
+    import React,{Component,Fragment} from 'react';
+
+
+            <Fragment>
+                <div>Home</div>
+                <Button type="primary">ssssssss</Button>
+            </Fragment>
+
+```
