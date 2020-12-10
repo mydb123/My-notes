@@ -1,4 +1,6 @@
-# 项目
+---
+title: react项目
+---
 
 ## 安装react
 
@@ -160,9 +162,9 @@
     import React,{Component,Fragment} from 'react';
 
 
-            <Fragment>
-                <div>Home</div>
-                <Button type="primary">ssssssss</Button>
-            </Fragment>
+    <Fragment>
+        <div>Home</div>
+        <Button type="primary">ssssssss</Button>
+    </Fragment>
 
 ```

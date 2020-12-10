@@ -35,6 +35,7 @@ module.exports = [
             { text: '随心记', link: '/others/recording/' },
             { text: '面试宝典', link: '/others/interview/' },
             { text: 'java配置', link: '/others/javadeploy/' },
+            { text: '规范', link: '/others/standard/' },
         ]
     },
     { 
