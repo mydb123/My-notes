@@ -6,8 +6,7 @@ title: react登录注册
 
 1. 箭头函数
 
-<img :src="$withBase('/front/react/箭头函数1.png')">
-
+<img :src="$withBase('/front/react/箭头函数1.jpg')">
 
 ```js
 
@@ -18,13 +17,13 @@ title: react登录注册
 
 ```
 
-<img :src="$withBase('/front/react/箭头函数2.png')">
+<img :src="$withBase('/front/react/箭头函数2.jpg')">
 
 
 
 2. 构造器内部声明
 
-<img :src="$withBase('/front/react/构造函数创建.png')">
+<img :src="$withBase('/front/react/构造函数创建.jpg')">
 
 ```js
 
@@ -36,7 +35,7 @@ title: react登录注册
 
 3. bind绑定
 
-<img :src="$withBase('/front/react/bain绑定.png')">
+<img :src="$withBase('/front/react/bain绑定.jpg')">
 
 
 ```js
@@ -69,7 +68,7 @@ title: react登录注册
 
 ## 登录注册组件化
 
-<img :src="$withBase('/front/react/登录注册组件化.png')">
+<img :src="$withBase('/front/react/登录注册组件化.jpg')">
 
 ```js
 
