@@ -94,3 +94,36 @@ ES5中， 6种：Number、String、Boolean、undefined、object、Null
     }
     F1()
 ```
+
+## vue 的常见路由方式有几种?
+
++ Hash:      使用URL的hash值来作为路由。支持所有浏览器。
+    - vue-router中默认使用的是hash模式，也就是会出现如下的URL：`localhost:8080/#/`URL中带有#号.
+
++ History:   以来HTML5 History API 和服务器配置。参考官网中HTML5 History模式
+
+```js
+
+    import Vue from 'vue'
+    import Router from 'vue-router'
+    import Main from '@/components/Main'
+    Vue.use(Router)
+
+    export default new Router({
+    mode: 'history',
+    routes: [
+        {
+        path: '/',
+        component: Main
+        }
+    ]
+    })
+
+```
+
++ Abstract： 支持所有javascript运行模式。如果发现没有浏览器的API，路由会自动强制进入这个模式。
+
+## vue项目，F5刷新页面后 title失效问题
+
+1. 别急，一款vue插件即可解决！插件名称：`vue-wechat-title`插件
+2. 信息存到vuex中的同时将数据用sessionStorage存储到本地，刷新页面之后将存储在本地的值重新赋值给vuex中
