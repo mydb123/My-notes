@@ -198,4 +198,9 @@ export default {
         
     }
 </style>
+
 ```
+
+## 项目文件分类
+
+<img :src="$withBase('/project/project/分类.jpg')">
