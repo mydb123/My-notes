@@ -340,3 +340,437 @@ title: react登录注册
     };
 
 ```
+
+
+
+## 验证码
+
++ 添加接口
+
+```js
+
+    //  src/api/account.js
+    /**
+    * 验证码接口
+    */
+    export function GetCode(data){
+        return service.request({
+            url:"/getSms/",
+            method:"post",
+            data, //请求了类型为post时
+        })
+    }
+
+```
+
++ 登录页面
+
+1. 第一种写法
+
+```js
+
+    //  src/views/login/LoginFrom.js
+    import { Form, Input, Button,Row, Col,message } from 'antd';// ANTD
+    import {Login,GetCode} from "../../api/account";//API
+
+    constructor() {
+        super();
+        this.state = {
+            username:"",
+        };
+        //react没有双向数据绑定的概念,v-model这个Vue的
+    };
+
+     // input输入处理
+    inputChange = (e) =>{
+        let value = e.target.value
+        // 更新input输入框的值给上面state的username
+        this.setState({
+            username: value,
+        })
+    }
+
+    //获取验证码
+    getCode = () =>{
+        if(!this.state.username){
+            message.warning('用户名不能为空',1);
+            return false;
+        }
+        const responseData = {
+            username:this.state.username,
+            modile:"login"
+        }
+        GetCode(responseData).then(response =>{
+            console.log(response);
+        }).catch(error =>{
+            
+        })
+    };
+
+   
+    render() {
+        const {username,code_button_disabled} = this.state
+        return (
+            <Fragment>
+                <Input value={username} onChange={this.inputChange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="账号" />
+                <Button type="danger" block onClick={this.getCode}>获取验证码</Button>
+
+            </Fragment>
+        );
+
+```
+
++ 第二种方法(难但是页面效果好看)
+
+```js
+
+    //  src/utils/validate.js
+    const reg_email= /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+
+    export function validate_email(value){
+        return reg_email.test(value);
+    }
+
+    //  src/views/login/LoginFrom.js
+
+    // import {validate_email} from "../../utils/validate";
+    constructor() {
+        super();
+        this.state = {
+            username:"",
+            // code_button_disabled : true
+        };
+        //react没有双向数据绑定的概念,v-model这个Vue的
+    };
+
+
+    const {username,code_button_disabled} = this.state;
+    // const _this = this;//this指向问题
+     <Form.Item name="username" rules={
+        [
+            { required: true, message: '邮箱不能为空' },
+            { type: "email", message: '邮箱格式不正确' },
+            // ({ getFieldValue }) => ({
+            //     validator(rule, value) {
+            //         if(validate_email(value)){
+            //             _this.setState({
+            //                 code_button_disabled : false
+            //             })
+            //             return Promise.resolve();
+            //         }
+            //       if (!value || getFieldValue('password') === value) {
+                    
+            //       }
+            //       return Promise.reject('The two passwords that you entered do not match!');
+            //     },
+            // }),
+        ]
+    }>
+        <Input value={username} onChange={this.inputChange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="账号" />
+    </Form.Item>
+    {/* <Button type="danger" disabled={code_button_disabled} block onClick={this.getCode}>获取验证码</Button> */}
+
+```
+
+## 验证码优化
+
+```js
+    //  src/views/login/LoginFrom.js
+    constructor() {
+        super();
+        this.state = {
+            code_button_loading: false,
+            code_button_text:"获取验证码"
+
+        };
+        //react没有双向数据绑定的概念,v-model这个Vue的
+    };
+
+    getCode = () =>{
+      
+        // 修改验证码状态
+        this.setState({
+            code_button_loading:true,
+            code_button_text:"发送中"
+        })
+
+        GetCode(responseData).then(response =>{
+            console.log(response);
+        }).catch(error =>{
+            this.setState({
+                code_button_loading:false,
+                code_button_text:"重新获取"
+            })
+        })
+    };
+    //render()内部
+    const {username,code_button_loading,code_button_text} = this.state;
+    <Button type="danger" loading={code_button_loading} block onClick={this.getCode}>{code_button_text}</Button>
+
+```
+
+## 验证码倒计时
++ 第一种写法(建议)
+
+```js
+
+    //  src/views/login/LoginFrom.js
+    
+    //API
+    import {Login,GetCode} from "../../api/account";
+
+    class LoginFrom extends Component {
+    constructor() {
+        super();
+        this.state = {
+            code_button_loading: false,//发送中的状态
+            code_button_disabled:false,//禁用和激活的状态
+            code_button_text:"获取验证码"
+
+        };
+        //react没有双向数据绑定的概念,v-model这个Vue的
+    };
+
+   
+    //获取验证码
+    getCode = () =>{
+        if(!this.state.username){
+            message.warning('用户名不能为空',1);
+            return false;
+        }
+        // 修改验证码状态
+        this.setState({
+            code_button_loading:true,
+            code_button_text:"发送中"
+        })
+        const responseData = {
+            username:this.state.username,
+            modile:"login"
+        }
+        GetCode(responseData).then(response =>{
+            //倒计时函数
+            this.countDown();
+        }).catch(error =>{
+            this.setState({
+                code_button_loading:false,
+                code_button_text:"重新获取"
+            })
+        })
+    };
+
+    /**倒计时 */ 
+    
+    countDown = ()=>{
+        // 定时器
+        let timer= null; 
+        // 定时时间
+        let sec = 5;
+        this.setState({
+            code_button_loading:false,
+            code_button_disabled:true,
+            code_button_text:`${sec}S`
+        })
+        // setInterval \clearInterval 不间断定时器
+        // setTimeout \clearTimeout 只执行一次
+         timer = setTimeout(() => {
+            sec--;
+            if(sec<=0){
+                this.setState({
+                    code_button_text:"重新获取",
+                    code_button_disabled:false
+                })
+                clearTimeout(timer); 
+                return false;   
+            }
+            this.setState({
+                code_button_text:`${sec}S`
+            })
+         }, 1000);
+
+    }
+
+ 
+
+   
+    render() {
+        const {username,code_button_loading,code_button_text,code_button_disabled} = this.state;
+       
+        return (
+            <Fragment>
+                    <div className="form-content">
+                        <Form
+                        name="normal_login"
+                        className="login-form"
+                        initialValues={{ remember: true }}
+                        onFinish={this.onFinish}
+                        >
+                            <Row gutter={13}>
+                                <Col span={15}>
+                                    <Input prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Code" />
+                                </Col>
+                                <Col span={9}>
+                                    <Button 
+                                    type="danger" 
+                                    disabled={code_button_disabled} 
+                                    loading={code_button_loading} 
+                                    block 
+                                    onClick={this.getCode}
+                                    >
+                                    {code_button_text}</Button>
+
+                                </Col>
+                            </Row>
+                            </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit" className="login-form-button" block> 登录</Button>
+                            </Form.Item>
+                        </Form>
+                    </div>
+            </Fragment>
+            )
+        }
+    };
+
+```
+
++ 第二种
+
+```js
+
+    //  src/views/login/LoginFrom.js
+    class LoginFrom extends Component {
+    constructor() {
+        super();
+        this.state = {
+            username:"",
+            // code_button_disabled : true,
+            code_button_loading: false,//发送中的状态
+            code_button_disabled:false,//禁用和激活的状态
+            code_button_text:"获取验证码",
+            flag: true,
+
+        };
+        //react没有双向数据绑定的概念,v-model这个Vue的
+    };
+
+    // 登录
+    onFinish = (values) => {
+        Login().then(response=>{
+            console.log(response);
+        }).catch(error=>{
+
+        })
+    };
+    //获取验证码
+    getCode = () =>{
+        //第一次点击
+        // if(!this.state.flag){ return false;}
+        if(!this.state.username){
+            message.warning('用户名不能为空',1);
+            return false;
+        }
+        // 修改验证码状态
+        this.setState({
+            code_button_loading:true,
+            code_button_text:"发送中"
+        })
+        const responseData = {
+            username:this.state.username,
+            modile:"login"
+        }
+        // this.setState({flag:false})
+        GetCode(responseData).then(response =>{
+            //倒计时函数
+            this.countDown();
+        }).catch(error =>{
+            this.setState({
+                code_button_loading:false,
+                code_button_text:"重新获取"
+            })
+            // this.setState({flag:true})
+        })
+    };
+
+    /**倒计时 */ 
+    
+    countDown = ()=>{
+        // 定时器
+        let timer= null; 
+        // 定时时间
+        let sec = 5;
+        this.setState({
+            code_button_loading:false,
+            code_button_disabled:true,
+            code_button_text:`${sec}S`
+        })
+        // setInterval \clearInterval 不间断定时器
+        // setTimeout \clearTimeout 只执行一次
+         timer = setTimeout(() => {
+            sec--;
+            if(sec<=0){
+                this.setState({
+                    code_button_text:"重新获取",
+                    code_button_disabled:false,
+                    // flag:true
+                })
+                clearTimeout(timer); 
+                return false;   
+            }
+            this.setState({
+                code_button_text:`${sec}S`
+            })
+         }, 1000);
+
+    }
+
+    /** input输入处理 */
+    inputChange = (e) =>{
+        let value = e.target.value
+        // 更新input输入框的值给上面state的username
+        this.setState({
+            username: value,
+        })
+    }
+
+    toggleForm = () =>{
+        // 去调用父级方法
+        this.props.switchFrom("register");
+        alert(333);
+    }
+
+    render() {
+        const {username,code_button_loading,code_button_text,code_button_disabled} = this.state;
+        // const {username,code_button_disabled} = this.state;
+        // const _this = this;
+        return (
+           <Fragment>
+                <div className="form-header">
+                    <h4 className="column">登录</h4>
+                    <span onClick={ this.toggleForm} >账号注册</span>
+                </div>
+                <div className="form-content">
+                    <Form
+                    name="normal_login"
+                    className="login-form"
+                    initialValues={{ remember: true }}
+                    onFinish={this.onFinish}
+                    >
+                        <Row gutter={13}>
+                            <Col span={15}>
+                                <Input prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Code" />
+                            </Col>
+                            <Col span={9}>
+                            // reate的行内按时写法不同**style={{color:'#fff'}}**
+                                <div style={{color:'#fff'}} block onClick={this.getCode}>{code_button_text}</div> 
+                            </Col>
+                        </Row>
+                        </Form.Item>
+
+                    </Form>
+                </div>
+           </Fragment>
+        )
+    }
+}
+
+```
