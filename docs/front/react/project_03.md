@@ -311,3 +311,35 @@ axios数据的获取以及处理逻辑上的事,不负责数据的渲染
 
 ##  密码加密
 + 安装依赖`npm install crypto-js`
++ 在`RegisterFrom.js`里加`import Crypto-js`
++ md5加密`const pwd = CryptoJs.MD5(password).toString();`
++ md5加密`const pwd = CryptoJs.SHA1(password).toString();`
+
+<img :src="$withBase('/front/react/密码加密.jpg')">
+
+
+## 注册/登录
+
++ 点击注册触发方法`onFinish`
+
+```js
+
+    onFinish = (values) => {
+        const requesData = {
+            username:this.state.username,
+            password:this.state.password,
+            code:this.state.code
+        }
+        Register(requesData).then(response =>{
+            const data = response.data;
+            message.success(data.message);
+            if(data.resCode ===0){
+                this.toggleForm()
+            }
+           
+        }).catch(error=>{
+
+        })
+    };
+
+```
