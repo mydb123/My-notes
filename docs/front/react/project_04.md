@@ -94,3 +94,100 @@ title: react首页
     }
 
 ```
+
+
+
+## 登录白名单
+
+```js
+
+    //LoginFrom.js
+    //通过withRouter加工后的组件会多出一个history.props,这时就可以通过history的push方法跳转路由了,this.props.history.push("/home")
+    //白名单
+    import {withRouter} from "react-router-dom";
+
+
+    Login(resquesData).then(response=>{
+            this.setState({
+                loading:true,
+            })
+            //路由跳转
+            const data = response.data.data;
+            setToken(data.token); 
+            this.props.history.push("/index");
+        }).catch(error=>{
+            this.setState({
+                loading:true,
+            })
+        })
+
+    export default withRouter(LoginFrom);
+
+
+```
+
+## react储存token
+
++ 在app.js修改
+
+```js
+
+    //私有组件
+    import PrivateRouter from "./components/privateRouter/index";
+
+    render(){
+        return(
+          <HashRouter>
+              <Switch>
+                <Route exact component={Login} path="/" />   
+                <PrivateRouter exact component={Index} path="/Index" />   
+              </Switch>
+          </HashRouter>
+        )
+    }
+
+```
+
++ 在components文件下新建privateRouter文件下新建index.js
+
+```js
+    //components/privateRouter/index.js
+    import React from "react";
+
+    import {Redirect, Route} from "react-router-dom";
+
+    //token
+    import {getToken} from "../../utils/seession";
+    const PrivateRouter = ({ component: Component, ...rest }) =>{
+        return (
+        <Route
+            {...rest}
+            render={routeProps => (
+                getToken() ? <Component {...routeProps} /> :<Redirect to="/"/>
+            )}
+        />
+        );
+    }
+
+    export default PrivateRouter;
+
+```
+
++ 在新建utils文件下新建seession.js
+
+```js
+
+    //seession.js
+    const tokenAdmin = "adminToken";
+
+    export function setToken(value){
+        sessionStorage.setItem(tokenAdmin,value)
+    }
+
+    export function getToken(value){
+    return sessionStorage.getItem(tokenAdmin,value)
+    }
+
+```
+
+## 
