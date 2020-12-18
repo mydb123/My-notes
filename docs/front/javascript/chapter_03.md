@@ -29,15 +29,52 @@ arr.forEach( function(item){
 // 3-----wangwu
 ```
 2. map()方法
+
 ```js
-var newArr = arr.map( function(value,index){
-    console.log(value + '---' + index)    
-    return value + 10		
-    })		
-    console.log(newArr)
+    var newArr = arr.map( function(value,index){
+        console.log(value + '---' + index)    
+        return value + 10		
+        })		
+        console.log(newArr)
 
 ```
+
+```js
+
+    
+    var array1 = [1,4,9,16];
+    const map1 = array1.map(x => x *2);
+    console.log(map1);
+    // > Array [2,8,18,32]
+
+    // 而我这样写时：
+    var array1 = [1, 4, 9, 16];
+ 
+    const map1 = array1.map(x => {
+        if (x == 4) {
+            return x * 2;
+        }
+    });
+    
+    console.log(map1);
+    // > Array [undefined, 8, undefined, undefined]
+    // 为什么会出现三个undefined呢？而不是我预期的[1,8,9,16]。
+
+    // 这样写只是增加了一个条件，即x的值为4时才乘以2，之所以会出现undefined，是因为map()方法创建了一个新数组，但新数组并不是在遍历完array1后才被赋值的，而是每遍历一次就得到一个值。所以，下面这样修改后就正确了：
+    
+    var array1 = [1, 4, 9, 16];
+    
+    const map1 = array1.map(x => {
+        if (x == 4) {
+            return x * 2;
+        }
+        return x;
+    });
+    
+```
+
 ## 新增数组元素
+
 ```js
     var arr =  ["aaa","bbb","ccc"];
     arr[3] = "ddd";
@@ -45,6 +82,7 @@ var newArr = arr.map( function(value,index){
 ```
 
 ## 函数
+
 声明函数
 ```js
     function kkk(){

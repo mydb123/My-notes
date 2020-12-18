@@ -8,6 +8,7 @@ title: Es6
 
 ## 对象结构赋值
 **对象结构允许我们使用变量的名字匹配对象的属性 匹配成功 将对象属性的值赋值给变量**
+
 ```js
     let person = {name:'lisi',age:30,sex:'男'};
     //let {name,age,sex} = person;
@@ -17,6 +18,7 @@ title: Es6
 ```
 
 ## 箭头函数 =>
+
 ```js
     ()=>{}
     //在箭头函数中 如果函数中只有一句代码
@@ -28,6 +30,7 @@ title: Es6
     // const result = sum(10,20);
     // consloe.log(result);//30
 ```
+
 ```js
     var obj = {  //对象不能产生作用域
         age = 20
@@ -36,6 +39,18 @@ title: Es6
         }
     }
     obj.say();//undefined
+```
+
+
+```js
+
+    x => x * x
+    //上面的箭头函数相当于：
+
+    function (x) {
+        return x * x;
+    }
+
 ```
 
 ## 剩余参数
