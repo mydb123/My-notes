@@ -190,4 +190,136 @@ title: react首页
 
 ```
 
-## 
+
+## 侧边栏
+
++ 在`components`文件下新键`asideMneu`文件下新键`index.js`
+
+```js
+
+    //侧边栏部分
+    import React,{Component,Fragment}from"react";
+
+    import { Link } from "react-router-dom";
+
+    //ANTD
+    import {  UserOutlined } from '@ant-design/icons';
+
+    import {Menu } from "antd";
+    //路由
+
+    import Router from "../../router/index"
+
+    const {SubMenu} = Menu;
+
+    class AsideMenu extends Component{
+        constructor(props){
+            super(props);
+            this.state={};
+        };
+
+        //无子级菜单处理
+        babaMenu = ({title,key}) =>{
+            return (
+                <Menu.Item key={key}>
+                    <Link to={key}><span>{title}</span></Link>
+                </Menu.Item>
+            )
+        }
+
+        //子级菜单处理
+        sunMenu = ({title,key,child}) =>{
+            return (
+                <SubMenu key={key} icon={<UserOutlined />} title={title}>
+                    {
+                        child && child.map(item =>{
+                            return  item.child && item.child.length > 0 ? this.sunMenu(item) : this.babaMenu(item);
+                        })
+                    }
+                </SubMenu>
+            )
+        }
+        render() {
+            return (
+                <Fragment>
+                
+                    <Menu 
+                    theme="dark" 
+                    mode="inline"
+                    defaultSelectedKeys={['1']}
+                    defaultOpenKeys={['sub1']}
+                    style={{height:'100%',borderRight:0}}
+                    >
+                        {console.log(Router)}
+
+                        {
+                            Router && Router.map(firstItem =>{
+
+                                return firstItem.child && firstItem.child.length > 0 ? this.sunMenu(firstItem) : this.babaMenu(firstItem);
+
+                            })                    
+                        }
+                        
+                    </Menu>
+                </Fragment>
+            )
+        }
+    }
+    export default AsideMenu;
+
+```
+
++ 在`views`/`index`/`components`/`aside.js`导入上面的文件,在`views`/`index`/`index.js`导入这个文件`aside.js`
+
+
+## 用户列表/添加用户
+
++ 创建文件:在`components`文件下新建`containerMain`/`Index.js`
+
+```js
+
+    //components/containerMain/Index.js
+    import React from 'react'
+    import {HashRouter,Switch,Route} from "react-router-dom";
+
+    //组件导入
+    import User from "../../views/user/Index";
+    import UserAdd from "../../views/user/Add";
+
+    // 导入验证token
+    import PrivateRouter from "../privateRouter/index";
+
+    class ContainerMain extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {};
+        }
+        render(){
+            return(
+                <Switch>
+                    <PrivateRouter exact path="/index/user/list"  component={User}  />   
+                    <PrivateRouter exact path="/index/user/add"  component={UserAdd}  />   
+                </Switch>
+            
+            )
+        }
+    }
+
+    export default ContainerMain;
+
+    //注意这里的exact,父级不能加exact
+```
+
++ 在`views`文件下新建`user`创建`Add.js`和`Index.js`并导出
++ 在`views/index/index`导入
+
+
+```js
+
+    import ContainerMain from "../../components/containerMain/Index";
+
+     <Content className="laout-main">
+        <ContainerMain />
+    </Content>
+
+```
