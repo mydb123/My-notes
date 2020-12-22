@@ -323,3 +323,279 @@ title: react首页
     </Content>
 
 ```
+
+
+
+
+## 界面优化(菜单栏的展开与高亮)
+
+# WithRouter
++ 将`react-router`的`history,location,match`,三个对象传入**props**对象上
+
+```js
+    //components/asideMneu/index.js
+    //在react-router-dom导入WithRouter
+    import { Link,withRouter } from "react-router-dom";
+
+    //再通过`componentDidMount`生命周期,在这里多一层接口请求,`console.log(this.props);`就可以获得地址栏的路径
+
+     //生命周期,在这里多一层接口请求,并过滤路由
+    componentDidMount(){
+        // console.log(this.props);
+        const pathname = this.props.location.pathname;
+        const menuKey  = pathname.split("/").slice(0,3).join("/")
+        // console.log(pathname.split("/"));
+        //根据.split("/")中"/"分割成数组,在用`.slice(0,3)`索引为0,截取三个,在用`join("/")`以/的方式转为字符串
+        // console.log(pathname.split("/").slice(0,3).join("/"));
+
+        this.setState({
+            selectedKeys: [pathname],
+            openKeys    : [menuKey]
+        })
+    }
+
+    //导入的时候进行包裹
+    export default withRouter(AsideMenu);
+
+```
+
+```js
+
+    //components/asideMneu/index.js
+    import { Link,withRouter } from "react-router-dom";
+
+    constructor(props){
+        super(props);
+        this.state={
+            selectedKeys:[], //当前选中的菜单项
+            openKeys: [], //当前展开的 SubMenu 菜单项
+        };
+    };
+
+    //生命周期,在这里多一层接口请求,并过滤路由
+    componentDidMount(){
+        // console.log(this.props);
+        const pathname = this.props.location.pathname;
+        const menuKey  = pathname.split("/").slice(0,3).join("/")
+        // console.log(pathname.split("/"));
+        //根据.split("/")中"/"分割成数组,在用`.slice(0,3)`索引为0,截取三个,在用`join("/")`以/的方式转为字符串
+        // console.log(pathname.split("/").slice(0,3).join("/"));
+       
+        const menuHigh = {
+            selectedKeys: pathname,
+            openKeys    : menuKey,
+        }
+       this.selectMenuHigh(menuHigh);
+    }
+
+    /** 选择菜单 */
+    selectMenu = ({ item, key, keyPath, domEvent }) => {
+        const menuHigh = {
+            selectedKeys: key,
+            openKeys    : keyPath[keyPath.length - 1]
+        }
+        this.selectMenuHigh(menuHigh);
+    }
+
+    /** 菜单高亮 */
+
+    selectMenuHigh = ({selectedKeys,openKeys}) => {
+        this.setState({
+            selectedKeys: [selectedKeys],
+            openKeys    : [openKeys]
+        })
+    }
+    /** 展开菜单项 */
+    openMenu = (openkeys) =>{
+        console.log(openkeys);
+        this.setState({
+            openKeys : [openkeys[openkeys.length - 1 ]]
+        })
+    }
+
+    render() {
+        const {selectedKeys,openKeys}= this.state; 
+        return (
+            <Fragment>
+                <Menu 
+                onOpenChange = {this.openMenu}
+                onClick={this.selectMenu}
+                theme="dark" 
+                mode="inline"
+                selectedKeys={selectedKeys}
+                openKeys={openKeys}
+                style={{height:'100%',borderRight:0}}
+                >
+                    {
+                        Router && Router.map(firstItem =>{
+
+                            return firstItem.child && firstItem.child.length > 0 ? this.sunMenu(firstItem) : this.babaMenu(firstItem);
+
+                        })                    
+                    }
+                    
+                </Menu>
+            </Fragment>
+        )
+    }
+
+    export default withRouter(AsideMenu);
+
+```
+
+## 显示隐藏侧边栏
+
+```js
+
+
+    //views\index\Index.js
+    import React,{Component} from "react";
+
+    //组件
+    import LayoutAside from "./components/aside";
+    import LayoutHeader from "./components/header";
+    import ContainerMain from "../../components/containerMain/Index";
+
+    //css
+    import "./layout.scss";
+
+    //ANTD
+    import { Layout } from 'antd';
+
+    const {Header, Sider, Content} = Layout;
+
+    class Index extends Component{
+        constructor(props){
+            super(props);
+            this.state={
+                collapsed: false,
+            };
+        }
+
+        componentDidMount(){
+            const collapsed = JSON.parse(sessionStorage.getItem("collapsed"));
+            this.setState({  collapsed });
+        }
+
+        toggleCollapsed = () =>{
+            const collapsed = !this.state.collapsed;
+            this.setState({  collapsed });
+            sessionStorage.setItem("collapsed",collapsed);
+
+        }
+        render(){
+            return (
+                <Layout className="laout-wrap">
+                    <Header className="laout-header" ><LayoutHeader toggle = {this.toggleCollapsed} collapsed={this.state.collapsed}/></Header>
+                    <Layout>
+                        <Sider width="250px" collapsed={this.state.collapsed}><LayoutAside/></Sider>
+                        <Content className="laout-main">
+                            <ContainerMain />
+                        </Content>
+                    </Layout>
+            </Layout>
+            )
+        }
+    }
+    export default Index;
+
+
+```
+
+```css
+
+    /* src\views\index\components\aside.scss */
+    .logo{
+        float: left;
+        width: 250px;
+        height: 75px;
+        margin-left: -50px;
+        align-items: center;
+        justify-content: center;
+        background-color: #001529;
+        -webkit-transition: all .2s ease 0s;
+        -moz-transition: all .2s ease 0s;
+        -ms-transition: all .2s ease 0s;
+        -o-transition: all .2s ease 0s;
+        transition: all .2s ease 0s;
+        span{
+            // display: block;
+            width: 177px;
+            height: 47px;
+            background-color: #1a2d3f;
+        }
+        
+    }
+    .collapsed-close{
+        
+        .logo{
+            width: 80px;
+            span{
+                width: 100%;
+            }
+        }
+        .header-wrap{
+            margin-left: 65px;
+        }
+    }
+    .header-wrap{
+        -webkit-transition: all .2s ease 0s;
+        -moz-transition: all .2s ease 0s;
+        -ms-transition: all .2s ease 0s;
+        -o-transition: all .2s ease 0s;
+        transition: all .2s ease 0s;
+        margin-left: 230px;
+        .header-icon{
+            font-size: 24px;
+            cursor: pointer;
+        }
+    }
+
+```
+
+```js
+
+    //\views\index\components\header.js
+    import React,{Component} from"react";
+
+    //AnTd 
+    import {AppstoreTwoTone } from '@ant-design/icons'
+    //css
+    import "./aside.scss";
+
+
+    class Header extends Component{
+        constructor(props){
+            super(props);
+            this.state={
+                collapsed: props.collapsed
+            };
+        }
+
+        //生命周期,监听父级props的值变化
+        componentWillReceiveProps({collapsed}){
+            console.log(collapsed);
+            this.setState({
+                //这里接受的参数和使用的值一样就可以写一个
+                collapsed
+            })
+            
+        };
+        toggleMen = ()=>{
+            this.props.toggle();
+        }
+        render() {
+            const {collapsed} =this.state
+            return (
+                <div className={collapsed ? "collapsed-close" :""}>
+                    <h1 className="logo"><span>LOgo</span> </h1>
+                    <div className="header-wrap">
+                        <span className="header-icon" onClick={this.toggleMen}><AppstoreTwoTone /></span>
+                    </div>
+                </div>
+            )
+        }
+    }
+    export default Header;
+
+```
