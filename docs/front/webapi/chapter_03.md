@@ -140,3 +140,21 @@ title: Es6
     Object.assign(target, source1, source2);
     target // {a:1, b:2, c:3}
 ```
+
+
+## es6拼接字符串的方式。
+
++ 但要是有很多变量需要连接，用+号就比较麻烦了。ES6新增了一种字符串连接方式：
+
+```js
+
+    var name1 ="Mike";
+    var age1=20;
+    var message1=`hello,${name1},your age is ${age1}`;//同理，这里的两个点是键盘上数字键1左边的按键，而不是单引号哦
+    alert(message1);
+
+    -------------------------------------------------------------------------
+    const splitfilesName = key.split(".");
+    const path = `/index${splitfilesName[1].toLowerCase()}`;
+    console.log(path);
+```
