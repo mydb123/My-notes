@@ -57,3 +57,255 @@ title: react列表系列
         )
     }
 ```
+
+
+## InputNumber
++ 专门处理数字的,大部门在form表单里
+
+## React-cookies
+
++ sessionStorage:生命周期是仅存在当前会话下有效果,也就是当前窗口,只要这个浏览器没用关闭,sessionStorage在关闭了浏览器窗口后就会被销毁
+
++ localStorage:生命周期是永久存在的,在关闭页面或者浏览器之后localStorage中的数据也不会消失.localStorage除非主动删除数据,否则数据永远不会消失
+
++ cookie:生命周期为只在设置cookie过期时间之前一直有效,即使窗口或者浏览器关闭,存放数据大小为4k左右,有个数限制(各浏览器不一样,一般不超过20个,缺点不能存储大数据且不易读取).
+
+##  react-cookies
++ 得安装依赖不然能用cookies
++ npm install react-cookies --save
+
+
+## 解决无法获取token,添加部门接口调试
+
++ 添加部门接口
+
+```js
+
+   //react-admin\src\api\department.js
+    import service from "../../src/utils/requets";
+
+    /**
+    * 添加部门接口
+    */
+    export function DepartmentAdd(data){
+        return service.request({
+            url:"/department/add/",
+            method:"post",
+            data, //请求了类型为post时
+        })
+    }
+
+```
+
++ 修改react-router的路径
+
+```js
+
+    // react-admin\src\components\privateRouter\index.js
+    import React from "react";
+
+    import {Redirect, Route} from "react-router-dom";
+
+    //token
+    import {getToken} from "../../utils/cookies";
+    const PrivateRouter = ({ component: Component, ...rest }) =>{
+        return (
+        <Route
+            {...rest}
+            render={routeProps => (
+                getToken() ? <Component {...routeProps} /> :<Redirect to="/"/>
+            )}
+        />
+        );
+    }
+
+    export default PrivateRouter;
+
+```
+
++ 新增文件cookies文件
+
+```js
+
+    //react-admin\src\utils\cookies.js
+    import cookies from "react-cookies";
+
+    const token = "adminToken";
+    const user = "username";
+
+    //存储token
+    export function setToken(value){
+        cookies.save(token,value)
+    }
+    export function getToken(){
+        return cookies.load(token)
+    }
+
+
+
+    //存储用户名
+    export function sutUsername(value){
+        cookies.save(user,value)
+    }
+
+
+    export function getUsername(){
+        return cookies.load(user)
+}
+
+
+```
+
++ 修改请求部门
+
+```js
+    //\react-admin\src\utils\requets.js
+    //第二部: 请求拦截(请求头)
+    service.interceptors.request.use(function (config) {
+
+
+
+//--------------------------------------------------
+        // 在发送请求之前做些什么 Token,Username
+        config.headers["Token"] = getToken();
+        config.headers["Username"] = getUsername();
+//--------------------------------------------------
+
+
+
+
+        return config;
+    }, function (error) {
+        // 对请求错误做些什么
+        return Promise.reject(error);
+    });
+
+
+```
+
++ 添加部门页面(主体)
+
+```js
+    //react-admin\src\views\department\Add.js
+    //部门管理-添加部门
+    import React,{Component} from "react";
+
+    //ANTD
+    import{Form, Input,Button, InputNumber,Radio,message} from 'antd';
+
+    //API
+    import { DepartmentAdd } from "../../api/department";
+
+    class AddDepartment extends Component{
+        constructor(props){
+            super();
+            this.state={
+                loading:false,
+                fromLayout:{
+                    labelCol:{span:2} ,
+                    wrapperCol:{span:20} 
+                }
+            }
+        }
+
+        onSubmit = (v) =>{
+            if(!v.name){
+                message.error("部门不能为空");
+                return false;
+            }
+            if(!v.number|| v.number ===0){
+                message.error("人员数量不能为0");
+                return false;
+            }
+            if(!v.content){
+                message.error("描述不能为空");
+                return false;
+            }
+            this.setState({
+                loading:true,
+            })
+            DepartmentAdd(v).then(response=>{
+                // console.log(response);
+                const data = response.data;
+                message.info(data.message);
+                this.setState({
+                    loading:false,
+                })
+                //重置表单
+                this.refs.form.resetFields();
+            }).catch(error=>{
+                this.setState({
+                    loading:false,
+                })
+            })
+        }
+        render() {
+            return(
+                // 老式写法
+                // <Form onFinish={this.onSubmit} labelCol={this.state.fromLayout.labelCol} wrapperCol={this.state.fromLayout.wrapperCol}></Form>
+                // es6扩展
+                <Form 
+                ref="form"
+                onFinish={this.onSubmit}
+                {...this.state.fromLayout} 
+                initialValues={{status:true,number:0}}
+                >
+                    <Form.Item label="部门名称" name="name">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="人员熟量" name="number">
+                        <InputNumber min={0} max={100}   />
+                    </Form.Item>
+                    <Form.Item label="禁启用" name="status">
+                        <Radio.Group  >
+                            <Radio value={true}>启用</Radio>
+                            <Radio value={false}>禁用</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    <Form.Item label="描述" name="content">
+                        <Input.TextArea />
+                    </Form.Item>
+                    <Button loading={this.state.loading} type="primary" htmlType="submit">提交</Button>
+                </Form>
+            )
+        }
+    }
+
+    export default AddDepartment;
+
+
+```
+
++ 两处修改
+
+```js
+
+   //react-admin\src\views\login\LoginFrom.js
+    import {setToken,sutUsername} from "../../utils/cookies";
+
+
+    Login(resquesData).then(response=>{
+            this.setState({
+                loading:true,
+            })
+            //路由跳转
+            const data = response.data.data;
+            setToken(data.token);
+
+
+//------------------------------
+
+            sutUsername(data.username)
+
+//------------------------------
+
+
+
+
+            this.props.history.push("/index");
+        }).catch(error=>{
+            this.setState({
+                loading:true,
+            })
+        })
+```
