@@ -308,4 +308,234 @@ title: react列表系列
                 loading:true,
             })
         })
+
 ```
+
+
+## React接口在`componentDidMount`来请求
+
++ 基本生命周期: constructor() --> componentWillMount()---->render()---->`componentDidMount()`
+
++ constructor被调用是在组件准备要挂载的最开始,此时组件尚未挂载到网页上.
+
++ componentWillMount 在constructor之后,在render之前,在这方法里的代码调用setState方法不会触发重新render,所以不会用来作加载数据之用
+
++ `componentDidMount`方法里的代码,是在组件已经完全挂载到网页上才会调用被执行.所以可以保证数据的加载
+
+## 配置路径不用../../
+
++ 到`config/webpack.config.js`文件里搜索`alias`
+
+```js
+
+     alias: {
+        '@': path.resolve('src'),
+        '@c': path.resolve('src/components'),
+        '@api': path.resolve('src/api'),
+        // Support React Native Web
+        // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+        'react-native': 'react-native-web',
+        // Allows for better profiling with ReactDevTools
+        ...(isEnvProductionProfile && {
+          'react-dom$': 'react-dom/profiling',
+          'scheduler/tracing': 'scheduler/tracing-profiling',
+        }),
+        ...(modules.webpackAliases || {}),
+      },
+
+```
+
+
+## 部门列表(1)
+
+```js
+
+    //src\api\department.js
+    /**
+    * 部门列表
+    */
+    export function GetList(data){
+        return service.request({
+            url:"/department/list/",
+            method:"post",
+            data, //请求了类型为post时
+        })
+    }
+
+    /**
+    * 删除列表一行
+    */
+    export function Delete(data){
+        return service.request({
+            url:"/department/delete/",
+            method:"post",
+            data, //请求了类型为post时
+        })
+    }
+
+    //---------------------------------全局错误拦截------------------------------------------------------------
+    //ANTD
+    import{message} from 'antd';
+
+    //第三步: 响应拦截(响应头)
+    service.interceptors.response.use(function (response) {
+        // 对响应数据做点什么
+        // console.log(response);
+        const data = response.data
+        if(data.resCode !==0){ //rescode不成功 全局错误拦截
+            message.info(data.message);
+            return  Promise.reject(response);
+        }else{ //resCode成功
+            return response;
+        }
+        return response;
+    }, function (error) {
+        // 对响应错误做点什么
+        return Promise.reject(error);
+    });
+
+```
+
++部门列表页面 
+
+```js
+
+    //src\views\department\List.js
+    import React,{Component,Fragment}from "react";
+
+
+    //ANTD
+    import {Form ,Input,Button, Table,Switch, message}from "antd";
+    // API
+    import {GetList,Delete} from "../../api/department";
+    class DepartmentList extends Component{
+        constructor(props){
+            super();
+            this.state = {
+                //请求参数
+                pageNumber:1, //页数
+                pageSize:10, //显示多少条
+                keyWork:"",
+                selectedRowKeys:[],//复选框
+                // 表头
+                columns:[
+                    { title:"部门名称",dataIndex:"name",key:"name"},
+                    { 
+                        title:"禁启用",
+                        dataIndex:"status",
+                        key:"status",
+                        render:(text,rowData)=>{
+                            return <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={rowData.status ==="1"? true : false }></Switch>
+                        }
+                    },
+                    { title:"人员数量",dataIndex:"number",key:"number"},
+                    { 
+                        title:"操作",
+                        dataIndex:"operation",
+                        key:"operation",
+                        width:215,
+                        render:(text,rowData)=>{
+                        return(
+                            <div className="inline-button">
+                                <Button type="primary">编辑</Button>
+                                <Button type="danger" onClick={()=>this.onHandlerDelete(rowData.id)}>删除</Button>
+                            </div>
+                        ) 
+                        }
+                    },
+                ],
+                //表的数据
+                data:[
+                    
+                ]
+            }
+        }
+
+
+
+        //生命周期挂载完成
+        componentDidMount = ()=>{
+            this.loaddata()
+        }
+        //获取数据
+        loaddata = ()=>{
+            const {pageNumber,pageSize,keyWork} = this.state
+            const requestData = {
+                pageNumber:pageNumber,
+                pageSize:pageSize,
+            }
+            if(keyWork){ requestData.name = keyWork }
+            GetList(requestData).then(response=>{
+                const responseData = response.data.data
+            //   console.log(response);
+            if(responseData.data){
+                this.setState({
+                    data:responseData.data
+                })
+            }
+            })
+        }
+
+        // 搜索
+        onFinish=(value)=>{
+            this.setState({
+                keyWork:value.name,
+                pageNumber:1, 
+                pageSize:10, 
+                
+            })
+            // //重新获取数据
+            this.loaddata()
+            // console.log(111);
+        
+        }
+        /**复选框 */
+        onChangebox = (selectedRowKeys )=>{
+            this.setState({
+                selectedRowKeys
+            })
+            // console.log(selectedRowKeys);
+        }
+        //删除
+        onHandlerDelete = (id) =>{
+            // console.log(id);
+            if(id){
+                return false;
+            }
+            Delete({id:id}).then(response=>{
+                // console.log(response);
+                message.info(response.data.message);
+                //请求数据
+                this.loaddata();
+            })
+        }
+        render(){
+            const {columns,data} = this.state
+            const rowSelection = {
+                onChange: this.onChangebox
+            }
+            return(
+                <Fragment>
+                    <Form layout="inline" onFinish={this.onFinish}>
+                        <Form.Item label="部门名称"  name="name"  >
+                            <Input placeholder="请输入部门名称" />
+                        </Form.Item>
+                        <Form.Item shouldUpdate={true}  >
+                            <Button type="primary" htmlType="submit">
+                                搜索
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                    <div className="table-wrap">
+                        <Table rowSelection={rowSelection} rowKey ="id" columns={columns} dataSource={data} bordered>  </Table>
+                    </div>
+                </Fragment>
+            )
+        }
+    }
+
+    export default DepartmentList;
+
+
+```
+
