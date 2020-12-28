@@ -53,6 +53,28 @@ title: Es6
 
 ```
 
+
+```js
+
+    aaa = () => {
+        'use strict';
+        console.log(this);
+        // window
+    }
+ 
+    var aaa = () => {
+        'use strict';
+        console.log(this);
+        // window
+    }
+    var bbb = function() {
+        'use strict';
+        console.log(this);
+        // undefined
+    }
+
+```
+
 ## 剩余参数
 ```js
     const sum = (...args)+>{
