@@ -539,3 +539,481 @@ title: react列表系列
 
 ```
 
+
+## React传参方式(3种)
+
+1. params传参(刷新页面后参数不消失,参数在地址栏里显示)
+路由页面:<Router path="/link/:id" component={Demo}></Router>
+链接方式:<Link to={'/Link/'+'xxx'}>首页</Link>或者<Link to={{pathname:'/link/'+'xxx'}}>首页</Link>
+js方式:this.props.history.push('/link/'+'xxx')或者this.props.history.push({pathname:'link'+'xxx'})
+获取方式:this.props.match.params.id//注意这里是match而非histry
+
+```js
+
+    //react\react-admin\src\views\department\List.js
+    import {Link} from "react-react-dom";
+
+
+    { 
+        title:"操作",
+        dataIndex:"operation",
+        key:"operation",
+        width:215,
+        render:(text,rowData)=>{
+            return(
+            <div className="inline-button">
+                <Button type="primary" onClick={()=>this.onHandlerEdit(rowData.id)}>
+                    <Link to={'/index/department/add?id='+rowData.id}>编辑</Link>
+                </Button>
+            </div>
+        ) 
+        }
+    },
+
+     //react\react-admin\src\views\department\Add.js
+    componentDidMount(){
+        console.log(this.props.location.state.id);
+    }
+
+```
+
+2. query传参(刷新页面参数消失)
+
+```js
+
+    //react\react-admin\src\views\department\List.js
+    import {Link} from "react-react-dom";
+
+
+    { 
+        title:"操作",
+        dataIndex:"operation",
+        key:"operation",
+        width:215,
+        render:(text,rowData)=>{
+            return(
+            <div className="inline-button">
+                <Button type="primary" onClick={()=>this.onHandlerEdit(rowData.id)}>
+                    <Link to={{pathname:"/index/department/add",query:{id:rowData.id}}}>编辑</Link>
+                </Button>
+            </div>
+        ) 
+        }
+    },
+
+     //react\react-admin\src\views\department\Add.js
+    componentDidMount(){
+        console.log(this.props.location.query.id);
+    }
+
+```
+
+2. query传参(刷新页面参数不消失,state传参是加密的)
+
+```js
+
+    //react\react-admin\src\views\department\List.js
+    import {Link} from "react-react-dom";
+
+
+    { 
+        title:"操作",
+        dataIndex:"operation",
+        key:"operation",
+        width:215,
+        render:(text,rowData)=>{
+            return(
+            <div className="inline-button">
+                <Button type="primary" onClick={()=>this.onHandlerEdit(rowData.id)}>
+                    <Link to={{pathname:"/index/department/add",sate:{id:rowData.id}}}>编辑</Link>
+                </Button>
+            </div>
+        ) 
+        }
+    },
+
+     //react\react-admin\src\views\department\Add.js
+    componentDidMount(){
+        console.log(this.props.location.sate.id);
+    }
+
+```
+
+
+## 删除/编辑
+
+```js
+
+    //src\api\department.js
+    //新增三个接口
+    /**
+    * 禁用启用切换
+    */
+    export function Status(data){
+        return service.request({
+            url:"/department/status/",
+            method:"post",
+            data, //请求了类型为post时
+        })
+    }
+
+    /**
+    * 详情
+    */
+    export function Detailed(data){
+        return service.request({
+            url:"/department/detailed/",
+            method:"post",
+            data, //请求了类型为post时
+        })
+    }
+
+    /**
+    * 编辑
+    */
+    export function Edit(data){
+        return service.request({
+            url:"/department/edit/",
+            method:"post",
+            data, //请求了类型为post时
+        })
+    }
+
+```
+
+
+
++ 列表页面
+
+
+```js
+
+    //src\views\department\List.js
+    import React,{Component,Fragment}from "react";
+
+
+
+    //*********************************************************************************************
+    //ANTD
+    import {Form ,Input,Button, Table,Switch, message,Modal}from "antd";
+    // API
+    import {GetList,Delete,Status} from "../../api/department";
+    import { Link } from "react-router-dom";
+    //*********************************************************************************************
+
+
+
+
+    class DepartmentList extends Component{
+        constructor(props){
+            super();
+            this.state = {
+                //请求参数
+                pageNumber:1, //页数
+                pageSize:10, //显示多少条
+                keyWork:"",
+
+
+    //*********************************************************************************************
+
+                selectedRowKeys:[],//复选框
+                visible:false,// 删除警告弹框
+                showPromiseConfirm:false,// 堂创确定按钮
+                id:"",
+    //*********************************************************************************************
+
+
+
+                // 表头
+                columns:[
+                    { title:"部门名称",dataIndex:"name",key:"name"},
+                    { 
+                        title:"禁启用",
+                        dataIndex:"status",
+                        key:"status",
+                        render:(text,rowData)=>{
+
+
+    //*********************************************************************************************
+
+                            return <Switch onChange={()=>this.onHandSwitch(rowData)} checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={rowData.status ==="1"? true : false }></Switch>
+    //*********************************************************************************************
+
+
+
+                        }
+                    },
+                    { title:"人员数量",dataIndex:"number",key:"number"},
+                    { 
+                        title:"操作",
+                        dataIndex:"operation",
+                        key:"operation",
+                        width:215,
+                        render:(text,rowData)=>{
+                        return(
+                            <div className="inline-button">
+
+    // *********************************************************************************************
+
+                                <Button type="primary">
+                                    <Link to={{pathname:"/index/department/add",state:{id:rowData.id}}}>编辑</Link>
+                                </Button>
+                                <Button type="danger" onClick={()=>this.onHandlerDelete(rowData.id)}>删除</Button>
+    //*********************************************************************************************
+
+                            </div>
+                        ) 
+                        }
+                    },
+                ],
+                //表的数据
+                data:[
+                    
+                ]
+            }
+        }
+
+
+
+        //生命周期挂载完成
+        componentDidMount = ()=>{
+            this.loaddata()
+        }
+        //获取数据
+        loaddata = ()=>{
+            const {pageNumber,pageSize,keyWork} = this.state
+            const requestData = {
+                pageNumber:pageNumber,
+                pageSize:pageSize,
+            }
+            if(keyWork){ requestData.name = keyWork }
+            GetList(requestData).then(response=>{
+                const responseData = response.data.data
+            //   console.log(response);
+            if(responseData.data){
+                this.setState({
+                    data:responseData.data
+                })
+            }
+            })
+        }
+
+        // 搜索
+        onFinish=(value)=>{
+            this.setState({
+                keyWork:value.name,
+                pageNumber:1, 
+                pageSize:10, 
+                
+            })
+            // //重新获取数据
+            this.loaddata()
+            // console.log(111);
+        
+        }
+        /**复选框 */
+        onChangebox = (selectedRowKeys )=>{
+            this.setState({
+                selectedRowKeys
+            })
+            // console.log(selectedRowKeys);
+        }
+
+    //*********************************************************************************************
+
+        //删除
+        onHandlerDelete(id){
+            // console.log(id);
+            if(!id){
+                return false;
+            }
+            this.setState({
+                visible:true,
+                id
+            })
+        
+        }
+        /**删除警告弹框 */
+        modalThen=()=>{
+            Delete({id:this.state.id}).then(response=>{
+                // console.log(response);
+                message.info(response.data.message);
+                this.setState({
+                    visible:false,
+                    id:"",
+                    showPromiseConfirm:false
+                })
+                //请求数据
+                this.loaddata();
+
+            })
+        }
+        //禁用启用
+        onHandSwitch(data){
+            if(!data.status){return false;}
+            const requesData = {
+                id:data.id,
+                status:data.status === "1"?false:true
+            }
+            Status().then(response =>{
+                message.info(response.data.message)
+            })
+        }
+        //编辑
+    //*********************************************************************************************
+
+        render(){
+            const {columns,data} = this.state
+            const rowSelection = {
+                onChange: this.onChangebox
+            }
+            return(
+                <Fragment>
+                    <Form layout="inline" onFinish={this.onFinish}>
+                        <Form.Item label="部门名称"  name="name"  >
+                            <Input placeholder="请输入部门名称" />
+                        </Form.Item>
+                        <Form.Item shouldUpdate={true}  >
+                            <Button type="primary" htmlType="submit">
+                                搜索
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                    <div className="table-wrap">
+                        <Table rowSelection={rowSelection} rowKey ="id" columns={columns} dataSource={data} bordered>  </Table>
+                    </div>
+
+
+    //*********************************************************************************************
+
+                    <Modal
+                        title="提示"
+                        visible={this.state.visible}
+                        onOk={this.modalThen}
+                        onCancel={()=>{this.setState({visible:false})}}
+                        showPromiseConfirm={this.state.showPromiseConfirm}
+                        okText="确认"
+                        cancelText="取消"
+                        >
+                        <p className="text-center">确认删除此信息吗,<strong className="color-red">删除后无法恢复</strong></p>
+                        
+                    </Modal>
+    //*********************************************************************************************
+
+
+                </Fragment>
+            )
+        }
+    }
+
+    export default DepartmentList;
+
+```
+
+
++ 从列表跳至添加页面其实是编辑,添加及更改了一些方法 
+
+```js
+
+    //\src\views\department\Add.js
+    //API
+    import { DepartmentAdd,Detailed,Edit } from "../../api/department";
+
+    class AddDepartment extends Component{
+        constructor(props){
+            super();
+            this.state={
+                loading:false,
+                id:"",
+                fromLayout:{
+                    labelCol:{span:2} ,
+                    wrapperCol:{span:20} 
+                }
+            }
+        }
+
+        //存储id避免Detailed传值写的过长
+        componentWillMount(){
+            if(this.props.location.state.id){
+                this.setState({
+                    id:this.props.location.state.id
+                })
+            }
+        }
+        //接受List传过来的参数
+        componentDidMount(){
+            this.getDetailed()
+            // console.log(this.props.location.state.id);
+        }
+
+        getDetailed=()=>{
+            if(!this.props.location.state){return false;}
+            Detailed({id:this.state.id}).then(response=>{
+                console.log(response);
+                // const data = response.data.data
+                // this.refs.form.setFieldsValue({
+                //     content: data.content,
+                //     name: data.name,
+                //     number:data.number,
+                //     status: data.status
+                // })
+                this.refs.form.setFieldsValue(response.data.data)
+            })
+        }
+
+        onSubmit = (v) =>{
+            if(!v.name){
+                message.error("部门不能为空");
+                return false;
+            }
+            if(!v.number|| v.number ===0){
+                message.error("人员数量不能为0");
+                return false;
+            }
+            if(!v.content){
+                message.error("描述不能为空");
+                return false;
+            }
+            this.setState({
+                loading:true,
+            })
+        //确定按钮执行添加或者编辑
+        this.state.id?this.onHandlerAdd(v):this.onHandEdit(v)
+        }
+        /**
+        * 添加信息
+        */
+        onHandlerAdd = (v)=>{
+            DepartmentAdd(v).then(response=>{
+                // console.log(response);
+                const data = response.data;
+                message.info(data.message);
+                this.setState({
+                    loading:false,
+                })
+                //重置表单
+                this.refs.form.resetFields();
+            }).catch(error=>{
+                this.setState({
+                    loading:false,
+                })
+                
+            })
+        }
+
+        /**
+        * 编辑信息
+        */
+        onHandEdit = (v) =>{
+            const responseData = v
+            responseData.id = this.state.id 
+            Edit(responseData).then(response=>{
+
+            }).catch(error=>{
+                this.setState({
+                    loading:false
+                })
+            })
+        } 
+
+```
