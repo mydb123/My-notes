@@ -70,7 +70,6 @@ title: react列表系列
 
 + cookie:生命周期为只在设置cookie过期时间之前一直有效,即使窗口或者浏览器关闭,存放数据大小为4k左右,有个数限制(各浏览器不一样,一般不超过20个,缺点不能存储大数据且不易读取).
 
-##  react-cookies
 + 得安装依赖不然能用cookies
 + npm install react-cookies --save
 
