@@ -414,3 +414,48 @@ title: 优化分离组件
     </div>
     
 ```
+
+
+
+## 数据类型检测
++ import PropTypes from "prop-types";
+PropTypes提供一系列验证器,可确保组件接受的数据类型是真实有效的.在本例中我们使用了PropTypes String.当传入的prop值类型不正确时,javaScript控制台会报错
+
+```js
+
+    //校验数据类型
+    MyComponent.propTypes = {
+        //你可以将属性声明为js原生类型,默认情况下这些属性都是可选的
+        optionalArray:PropTypes.array,
+        optionalBool:PropTypes.bool,
+        optionalFunc:PropTypes.func,
+        optionalNumber:PropTypes.number,
+        optionalObject:PropTypes.object,
+        optionalString:PropTypes.string,
+    }
+
+```
+
+```js
+
+    //默认值
+    MyComponent.defaultProps={
+        batchButton:false
+    }
+
+```
+
+
+
+## state里数据要异步
+当立即改变`state`里面的值时候要在`setState`里进行异步处理例子如下:
+
+```js
+
+    this.setState({
+        pageNumber:value
+    },()=>{
+        this.loadData()
+    })
+
+```
