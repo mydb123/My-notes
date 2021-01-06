@@ -8,75 +8,73 @@ title: 优化分离组件
 
    //src\views\department\List.js
     // 分离table前的部门列表组件
-    import React,{Component,Fragment}from "react";
+   // import React,{Component,Fragment}from "react";
 
     //ANTD
-    import {Form ,Input,Button, Table,Switch, message,Modal}from "antd";
+    //import {Form ,Input,Button, Table,Switch, message,Modal}from "antd";
     // API
-    import {GetList,Delete,Status} from "../../api/department";
-    import { Link } from "react-router-dom";
+    //import {GetList,Delete,Status} from "../../api/department";
+    //import { Link } from "react-router-dom";
 
     //table 组件
     // import TableComponent from "@c/tableData/Index";
-    class DepartmentList extends Component{
-        constructor(props){
-            super();
-            this.state = {
+    // class DepartmentList extends Component{
+    //     constructor(props){
+    //         super();
+    //         this.state = {
 
-                loadingTable:false,
-                //请求参数
-                pageNumber:1, //页数
-                pageSize:10, //显示多少条
-                keyWork:"",
+    //             loadingTable:false,
+    //             //请求参数
+    //             pageNumber:1, //页数
+    //             pageSize:10, //显示多少条
+    //             keyWork:"",
 
-                selectedRowKeys:[],//复选框
-                visible:false,// 删除警告弹框
-                showPromiseConfirm:false,// 堂创确定按钮
-                id:"",
+    //             selectedRowKeys:[],//复选框
+    //             visible:false,// 删除警告弹框
+    //             showPromiseConfirm:false,// 堂创确定按钮
+    //             id:"",
 
-                // 表头
-                columns:[
-                    { title:"部门名称",dataIndex:"name",key:"name"},
-                    { 
-                        title:"禁启用",
-                        dataIndex:"status",
-                        key:"status",
-                        render:(text,rowData)=>{
-                            return <Switch onChange={()=>this.onHandSwitch(rowData)} loading={rowData.id ==this.state.id} checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={rowData.status ==="1"? true : false }></Switch>
-                        }
-                    },
-                    { title:"人员数量",dataIndex:"number",key:"number"},
-                    { 
-                        title:"操作",
-                        dataIndex:"operation",
-                        key:"operation",
-                        width:215,
-                        render:(text,rowData)=>{
-                        return(
-                            <div className="inline-button">
+    //             // 表头
+    //             columns:[
+    //                 { title:"部门名称",dataIndex:"name",key:"name"},
+    //                 { 
+    //                     title:"禁启用",
+    //                     dataIndex:"status",
+    //                     key:"status",
+    //                     render:(text,rowData)=>{
+    //                         return <Switch onChange={()=>this.onHandSwitch(rowData)} loading={rowData.id ==this.state.id} checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={rowData.status ==="1"? true : false }></Switch>
+    //                     }
+    //                 },
+    //                 { title:"人员数量",dataIndex:"number",key:"number"},
+    //                 { 
+    //                     title:"操作",
+    //                     dataIndex:"operation",
+    //                     key:"operation",
+    //                     width:215,
+    //                     render:(text,rowData)=>{
+    //                     return(
+    //                         <div className="inline-button">
 
-                                <Button type="primary">
-                                    <Link to={{pathname:"/index/department/add",state:{id:rowData.id}}}>编辑</Link>
-                                </Button>
-                                <Button type="danger" onClick={()=>this.onHandlerDelete(rowData.id)}>删除</Button>
-                            </div>
-                        ) 
-                        }
-                    },
-                ],
-                //表的数据
-                data:[
+    //                             <Button type="primary">
+    //                                 <Link to={{pathname:"/index/department/add",state:{id:rowData.id}}}>编辑</Link>
+    //                             </Button>
+    //                             <Button type="danger" onClick={()=>this.onHandlerDelete(rowData.id)}>删除</Button>
+    //                         </div>
+    //                     ) 
+    //                     }
+    //                 },
+    //             ],
+    //             //表的数据
+    //             data:[
                     
-                ]
-            }
-        }
-
-
+    //             ]
+    //         }
+    //     }
 
         //生命周期挂载完成
-        componentDidMount = ()=>{
-            this.loaddata()
-        }
+        // componentDidMount = ()=>{
+        //     this.loaddata()
+        // }
         //获取数据
         loaddata = ()=>{
             const {pageNumber,pageSize,keyWork} = this.state
@@ -114,6 +112,7 @@ title: 优化分离组件
             // console.log(111);
         
         }
+
         /**复选框 */
         onChangebox = (selectedRowKeys )=>{
             this.setState({
@@ -121,6 +120,7 @@ title: 优化分离组件
             })
             // console.log(selectedRowKeys);
         }
+
         //删除
         onHandlerDelete(id){
             if(!id){
@@ -134,6 +134,7 @@ title: 优化分离组件
             })
         
         }
+
         /**删除警告弹框 */
         modalThen=()=>{
             Delete({id:this.state.id}).then(response=>{
@@ -150,64 +151,64 @@ title: 优化分离组件
 
             })
         }
-        //禁用启用
-        onHandSwitch(data){
-            if(!data.status){return false;}
-            const requesData = {
-                id:data.id,
-                status:data.status === "1"?false:true
-            }
-            this.setState({ id:data.id })
-            Status(requesData).then(response =>{
-                message.info(response.data.message)
-                this.setState({ id:"" })
+        // //禁用启用
+        // onHandSwitch(data){
+        //     if(!data.status){return false;}
+        //     const requesData = {
+        //         id:data.id,
+        //         status:data.status === "1"?false:true
+        //     }
+        //     this.setState({ id:data.id })
+        //     Status(requesData).then(response =>{
+        //         message.info(response.data.message)
+        //         this.setState({ id:"" })
 
-            }).catch(error=>{
-                this.setState({ id:"" })
-            })
-        }
-        //编辑
-        render(){
-            const {columns,data,loadingTable} = this.state
-            const rowSelection = {
-                onChange: this.onChangebox
-            }
-            return(
-                <Fragment>
-                    <Form layout="inline" onFinish={this.onFinish}>
-                        <Form.Item label="部门名称"  name="name"  >
-                            <Input placeholder="请输入部门名称" />
-                        </Form.Item>
-                        <Form.Item shouldUpdate={true}  >
-                            <Button type="primary" htmlType="submit">
-                                搜索
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                    <div className="table-wrap">
-                        {/* <TableComponent  /> */}
-                        <Table loading={loadingTable} rowSelection={rowSelection} rowKey ="id" columns={columns} dataSource={data} bordered>  </Table>
-                        <Button onClick={()=>this.onHandlerDelete()}>批量删除</Button>
-                    </div>
+        //     }).catch(error=>{
+        //         this.setState({ id:"" })
+        //     })
+        // }
+        //---------------------编辑---------------------
+        // render(){
+        //     const {columns,data,loadingTable} = this.state
+        //     const rowSelection = {
+        //         onChange: this.onChangebox
+        //     }
+        //     return(
+        //         <Fragment>
+        //             <Form layout="inline" onFinish={this.onFinish}>
+        //                 <Form.Item label="部门名称"  name="name"  >
+        //                     <Input placeholder="请输入部门名称" />
+        //                 </Form.Item>
+        //                 <Form.Item shouldUpdate={true}  >
+        //                     <Button type="primary" htmlType="submit">
+        //                         搜索
+        //                     </Button>
+        //                 </Form.Item>
+        //             </Form>
+        //             <div className="table-wrap">
+        //                 {/* <TableComponent  /> */}
+        //                 <Table loading={loadingTable} rowSelection={rowSelection} rowKey ="id" columns={columns} dataSource={data} bordered>  </Table>
+        //                 <Button onClick={()=>this.onHandlerDelete()}>批量删除</Button>
+        //             </div>
                     
-                    <Modal
-                        title="提示"
-                        visible={this.state.visible}
-                        onOk={this.modalThen}
-                        onCancel={()=>{this.setState({visible:false})}}
-                        showPromiseConfirm={this.state.showPromiseConfirm}
-                        okText="确认"
-                        cancelText="取消"
-                        >
-                        <p className="text-center">确认删除此信息吗,<strong className="color-red">删除后无法恢复</strong></p>
+        //             <Modal
+        //                 title="提示"
+        //                 visible={this.state.visible}
+        //                 onOk={this.modalThen}
+        //                 onCancel={()=>{this.setState({visible:false})}}
+        //                 showPromiseConfirm={this.state.showPromiseConfirm}
+        //                 okText="确认"
+        //                 cancelText="取消"
+        //                 >
+        //                 <p className="text-center">确认删除此信息吗,<strong className="color-red">删除后无法恢复</strong></p>
                         
-                    </Modal>
-                </Fragment>
-            )
-        }
+        //             </Modal>
+        //         </Fragment>
+        //     )
+        // }
     }
 
-    export default DepartmentList; 
+    // export default DepartmentList; 
 
 
 ```
@@ -418,7 +419,9 @@ title: 优化分离组件
 
 
 ## 数据类型检测
+
 + import PropTypes from "prop-types";
+
 PropTypes提供一系列验证器,可确保组件接受的数据类型是真实有效的.在本例中我们使用了PropTypes String.当传入的prop值类型不正确时,javaScript控制台会报错
 
 ```js
@@ -448,6 +451,7 @@ PropTypes提供一系列验证器,可确保组件接受的数据类型是真实�
 
 
 ## state里数据要异步
+
 当立即改变`state`里面的值时候要在`setState`里进行异步处理例子如下:
 
 ```js
