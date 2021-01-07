@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>分离组件添加部门 | notes</title>
+    <meta name="description" content="notes">
+    <meta name="generator" content="VuePress 1.4.0">
+    <link rel="icon" href="/My-notes/icons/favicon.ico">
+  <link rel="manifest" href="/My-notes/manifest.json">
+    
+    <link rel="preload" href="/My-notes/assets/css/0.styles.5acd7f6f.css" as="style"><link rel="preload" href="/My-notes/assets/js/app.015e7f34.js" as="script"><link rel="preload" href="/My-notes/assets/js/2.a0b16310.js" as="script"><link rel="preload" href="/My-notes/assets/js/36.0262a3d1.js" as="script"><link rel="preload" href="/My-notes/assets/js/3.d5588be5.js" as="script"><link rel="prefetch" href="/My-notes/assets/js/10.7aadc58a.js"><link rel="prefetch" href="/My-notes/assets/js/11.b4e1d08a.js"><link rel="prefetch" href="/My-notes/assets/js/12.0622404e.js"><link rel="prefetch" href="/My-notes/assets/js/13.16a73702.js"><link rel="prefetch" href="/My-notes/assets/js/14.7760d2a2.js"><link rel="prefetch" href="/My-notes/assets/js/15.1ecbed82.js"><link rel="prefetch" href="/My-notes/assets/js/16.dde570c1.js"><link rel="prefetch" href="/My-notes/assets/js/17.b4f283e0.js"><link rel="prefetch" href="/My-notes/assets/js/18.eab48c79.js"><link rel="prefetch" href="/My-notes/assets/js/19.9e33ace1.js"><link rel="prefetch" href="/My-notes/assets/js/20.bbd68983.js"><link rel="prefetch" href="/My-notes/assets/js/21.e359b895.js"><link rel="prefetch" href="/My-notes/assets/js/22.5d656200.js"><link rel="prefetch" href="/My-notes/assets/js/23.dbf290ae.js"><link rel="prefetch" href="/My-notes/assets/js/24.1656276c.js"><link rel="prefetch" href="/My-notes/assets/js/25.02672a6d.js"><link rel="prefetch" href="/My-notes/assets/js/26.cfd7ebac.js"><link rel="prefetch" href="/My-notes/assets/js/27.8b9abcef.js"><link rel="prefetch" href="/My-notes/assets/js/28.088bad68.js"><link rel="prefetch" href="/My-notes/assets/js/29.6922eaab.js"><link rel="prefetch" href="/My-notes/assets/js/30.28e8ab7b.js"><link rel="prefetch" href="/My-notes/assets/js/31.437c6a41.js"><link rel="prefetch" href="/My-notes/assets/js/32.2a1c6394.js"><link rel="prefetch" href="/My-notes/assets/js/33.39d85b34.js"><link rel="prefetch" href="/My-notes/assets/js/34.4fa64215.js"><link rel="prefetch" href="/My-notes/assets/js/35.2efb8c75.js"><link rel="prefetch" href="/My-notes/assets/js/37.2b5135e5.js"><link rel="prefetch" href="/My-notes/assets/js/38.a9f2e0c1.js"><link rel="prefetch" href="/My-notes/assets/js/39.ed5b32a4.js"><link rel="prefetch" href="/My-notes/assets/js/4.7c8e17c5.js"><link rel="prefetch" href="/My-notes/assets/js/40.61be5f0a.js"><link rel="prefetch" href="/My-notes/assets/js/41.1844b6a5.js"><link rel="prefetch" href="/My-notes/assets/js/42.7f3395a1.js"><link rel="prefetch" href="/My-notes/assets/js/43.dfee4b51.js"><link rel="prefetch" href="/My-notes/assets/js/44.3af44580.js"><link rel="prefetch" href="/My-notes/assets/js/45.0a08c68b.js"><link rel="prefetch" href="/My-notes/assets/js/46.9f4bcb48.js"><link rel="prefetch" href="/My-notes/assets/js/47.9d79e965.js"><link rel="prefetch" href="/My-notes/assets/js/48.63f99b10.js"><link rel="prefetch" href="/My-notes/assets/js/49.f072b338.js"><link rel="prefetch" href="/My-notes/assets/js/5.5a688d0c.js"><link rel="prefetch" href="/My-notes/assets/js/50.133611ad.js"><link rel="prefetch" href="/My-notes/assets/js/51.24ee410a.js"><link rel="prefetch" href="/My-notes/assets/js/52.24ae560c.js"><link rel="prefetch" href="/My-notes/assets/js/53.b8b7e229.js"><link rel="prefetch" href="/My-notes/assets/js/54.2dfcce20.js"><link rel="prefetch" href="/My-notes/assets/js/55.e376e3ab.js"><link rel="prefetch" href="/My-notes/assets/js/56.2c0a24f7.js"><link rel="prefetch" href="/My-notes/assets/js/57.c48c839b.js"><link rel="prefetch" href="/My-notes/assets/js/58.83a5e4f8.js"><link rel="prefetch" href="/My-notes/assets/js/59.b10cd758.js"><link rel="prefetch" href="/My-notes/assets/js/6.29d76593.js"><link rel="prefetch" href="/My-notes/assets/js/60.6aa158f7.js"><link rel="prefetch" href="/My-notes/assets/js/61.b16a7d04.js"><link rel="prefetch" href="/My-notes/assets/js/62.9d95c51c.js"><link rel="prefetch" href="/My-notes/assets/js/63.e7e19435.js"><link rel="prefetch" href="/My-notes/assets/js/64.33833ea8.js"><link rel="prefetch" href="/My-notes/assets/js/65.d077cee0.js"><link rel="prefetch" href="/My-notes/assets/js/66.b1aa190f.js"><link rel="prefetch" href="/My-notes/assets/js/67.52d57de9.js"><link rel="prefetch" href="/My-notes/assets/js/68.80215707.js"><link rel="prefetch" href="/My-notes/assets/js/69.301e3599.js"><link rel="prefetch" href="/My-notes/assets/js/7.8a6613f0.js"><link rel="prefetch" href="/My-notes/assets/js/70.bbe26619.js"><link rel="prefetch" href="/My-notes/assets/js/71.cc08ffd7.js"><link rel="prefetch" href="/My-notes/assets/js/72.41ec8713.js"><link rel="prefetch" href="/My-notes/assets/js/73.4c26e4c6.js"><link rel="prefetch" href="/My-notes/assets/js/74.26cc9ec4.js"><link rel="prefetch" href="/My-notes/assets/js/75.04babf90.js"><link rel="prefetch" href="/My-notes/assets/js/76.60006f9d.js"><link rel="prefetch" href="/My-notes/assets/js/77.907d8280.js"><link rel="prefetch" href="/My-notes/assets/js/78.a5a15493.js"><link rel="prefetch" href="/My-notes/assets/js/79.c0d8438f.js"><link rel="prefetch" href="/My-notes/assets/js/8.7674507a.js"><link rel="prefetch" href="/My-notes/assets/js/80.c5f57175.js"><link rel="prefetch" href="/My-notes/assets/js/81.57a9cf0b.js"><link rel="prefetch" href="/My-notes/assets/js/82.ddb36f01.js"><link rel="prefetch" href="/My-notes/assets/js/83.adfdbd9d.js"><link rel="prefetch" href="/My-notes/assets/js/84.a30985d6.js"><link rel="prefetch" href="/My-notes/assets/js/85.a53fddd6.js"><link rel="prefetch" href="/My-notes/assets/js/86.3cefc076.js"><link rel="prefetch" href="/My-notes/assets/js/87.69ad01b3.js"><link rel="prefetch" href="/My-notes/assets/js/9.c2d910f0.js">
+    <link rel="stylesheet" href="/My-notes/assets/css/0.styles.5acd7f6f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/My-notes/" class="home-link router-link-active"><!----> <span class="site-name">notes</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/My-notes/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/My-notes/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><span class="title">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/front/htmlcss/" class="nav-link">
+  HtmlCss
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/javascript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/webapi/" class="nav-link">
+  WebAPI
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/jquery/" class="nav-link">
+  jQuery
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/vue/" class="nav-link">
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/react/" class="nav-link router-link-active">
+  React
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/threejs/" class="nav-link">
+  ThreeJs
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/backend/java/" class="nav-link">
+  Java
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="移动端" class="dropdown-title"><span class="title">移动端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/mobile/applets/" class="nav-link">
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/mobile/application/" class="nav-link">
+  uni-app
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="开发工具" class="dropdown-title"><span class="title">开发工具</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/tools/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/tools/vscode/" class="nav-link">
+  VSCode
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其它" class="dropdown-title"><span class="title">其它</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/others/utils/" class="nav-link">
+  Utils
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/others/recording/" class="nav-link">
+  随心记
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/others/interview/" class="nav-link">
+  面试宝典
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/others/javadeploy/" class="nav-link">
+  java配置
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/others/standard/" class="nav-link">
+  规范
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="项目" class="dropdown-title"><span class="title">项目</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/project/project/" class="nav-link">
+  项目
+</a></li></ul></div></div> <a href="https://github.com/mydb123/My-notes" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/My-notes/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/My-notes/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><span class="title">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/front/htmlcss/" class="nav-link">
+  HtmlCss
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/javascript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/webapi/" class="nav-link">
+  WebAPI
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/jquery/" class="nav-link">
+  jQuery
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/vue/" class="nav-link">
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/react/" class="nav-link router-link-active">
+  React
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/front/threejs/" class="nav-link">
+  ThreeJs
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/backend/java/" class="nav-link">
+  Java
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="移动端" class="dropdown-title"><span class="title">移动端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/mobile/applets/" class="nav-link">
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/mobile/application/" class="nav-link">
+  uni-app
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="开发工具" class="dropdown-title"><span class="title">开发工具</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/tools/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/tools/vscode/" class="nav-link">
+  VSCode
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其它" class="dropdown-title"><span class="title">其它</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/others/utils/" class="nav-link">
+  Utils
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/others/recording/" class="nav-link">
+  随心记
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/others/interview/" class="nav-link">
+  面试宝典
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/others/javadeploy/" class="nav-link">
+  java配置
+</a></li><li class="dropdown-item"><!----> <a href="/My-notes/others/standard/" class="nav-link">
+  规范
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="项目" class="dropdown-title"><span class="title">项目</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/My-notes/project/project/" class="nav-link">
+  项目
+</a></li></ul></div></div> <a href="https://github.com/mydb123/My-notes" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>REACT</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/My-notes/front/react/" class="sidebar-link">首页</a></li><li><a href="/My-notes/front/react/chapter_01.html" class="sidebar-link">react初始化</a></li><li><a href="/My-notes/front/react/chapter_02.html" class="sidebar-link">使用React</a></li><li><a href="/My-notes/front/react/chapter_03.html" class="sidebar-link">JSX语法</a></li><li><a href="/My-notes/front/react/chapter_04.html" class="sidebar-link">组件创建和传值</a></li><li><a href="/My-notes/front/react/chapter_05.html" class="sidebar-link">class关键字</a></li><li><a href="/My-notes/front/react/chapter_06.html" class="sidebar-link">React案例</a></li><li><a href="/My-notes/front/react/chapter_07.html" class="sidebar-link">React绑定和生命周期</a></li><li><a href="/My-notes/front/react/project_01.html" class="sidebar-link">react项目</a></li><li><a href="/My-notes/front/react/project_02.html" class="sidebar-link">react登录注册</a></li><li><a href="/My-notes/front/react/project_03.html" class="sidebar-link">react登录注册二</a></li><li><a href="/My-notes/front/react/project_04.html" class="sidebar-link">react首页</a></li><li><a href="/My-notes/front/react/project_05.html" class="sidebar-link">react列表系列</a></li><li><a href="/My-notes/front/react/project_06.html" class="sidebar-link">优化分离组件</a></li><li><a href="/My-notes/front/react/project_07.html" class="active sidebar-link">分离组件添加部门</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/My-notes/front/react/project_07.html#添加组件分离原版" class="sidebar-link">添加组件分离原版</a></li><li class="sidebar-sub-header"><a href="/My-notes/front/react/project_07.html#函数报错" class="sidebar-link">函数报错</a></li><li class="sidebar-sub-header"><a href="/My-notes/front/react/project_07.html#提取组件该怎么传参例" class="sidebar-link">提取组件该怎么传参例:</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="添加组件分离原版"><a href="#添加组件分离原版" class="header-anchor">#</a> 添加组件分离原版</h2> <div class="language-js extra-class"><pre class="language-js"><code>    <span class="token comment">//  src\views\department\Add.js</span>
+    <span class="token comment">//部门管理-添加部门</span>
+    <span class="token keyword">import</span> React<span class="token punctuation">,</span><span class="token punctuation">{</span>Component<span class="token punctuation">,</span>Fragment<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;react&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//ANTD</span>
+    <span class="token keyword">import</span><span class="token punctuation">{</span>Form<span class="token punctuation">,</span> Input<span class="token punctuation">,</span>Button<span class="token punctuation">,</span> InputNumber<span class="token punctuation">,</span>Radio<span class="token punctuation">,</span>message<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'antd'</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//API</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> DepartmentAdd<span class="token punctuation">,</span>Detailed<span class="token punctuation">,</span>Edit <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;../../api/department&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//组件</span>
+    <span class="token keyword">import</span> FormCom <span class="token keyword">from</span><span class="token string">&quot;@c/form/Index&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">class</span> <span class="token class-name">AddDepartment</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token punctuation">{</span>
+        <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token operator">=</span><span class="token punctuation">{</span>
+                loading<span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+                fromLayout<span class="token operator">:</span><span class="token punctuation">{</span>
+                    labelCol<span class="token operator">:</span><span class="token punctuation">{</span>span<span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">}</span> <span class="token punctuation">,</span>
+                    wrapperCol<span class="token operator">:</span><span class="token punctuation">{</span>span<span class="token operator">:</span><span class="token number">20</span><span class="token punctuation">}</span> 
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">//存储id避免Detailed传值写的过长</span>
+        <span class="token function">componentWillMount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>location<span class="token punctuation">.</span>state<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                    id<span class="token operator">:</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>location<span class="token punctuation">.</span>state<span class="token punctuation">.</span>id
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//接受List传过来的参数</span>
+        
+        <span class="token function">componentDidMount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getDetailed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token comment">// console.log(this.props.location.state.id);</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token function-variable function">getDetailed</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>location<span class="token punctuation">.</span>state<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+            <span class="token function">Detailed</span><span class="token punctuation">(</span><span class="token punctuation">{</span>id<span class="token operator">:</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>id<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token comment">// console.log(response);</span>
+                <span class="token comment">// const data = response.data.data</span>
+                <span class="token comment">// this.refs.form.setFieldsValue({</span>
+                <span class="token comment">//     content: data.content,</span>
+                <span class="token comment">//     name: data.name,</span>
+                <span class="token comment">//     number:data.number,</span>
+                <span class="token comment">//     status: data.status</span>
+                <span class="token comment">// })</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>refs<span class="token punctuation">.</span>form<span class="token punctuation">.</span><span class="token function">setFieldsValue</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token function-variable function">onSubmit</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">v</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token comment">// console.log(v);</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>v<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                message<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">&quot;部门不能为空&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>v<span class="token punctuation">.</span>number<span class="token operator">||</span> v<span class="token punctuation">.</span>number <span class="token operator">===</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                message<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">&quot;人员数量不能为0&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>v<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                message<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">&quot;描述不能为空&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                loading<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token comment">//确定按钮执行添加或者编辑</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>id<span class="token operator">?</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">onHandEdit</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token operator">:</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">onHandlerAdd</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+            <span class="token comment">// this.onHandlerAdd(v)</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">/**
+        * 添加信息
+        */</span>
+        <span class="token function-variable function">onHandlerAdd</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">v</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token function">DepartmentAdd</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+                console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">const</span> data <span class="token operator">=</span> response<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+                message<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                    loading<span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+                <span class="token comment">//重置表单</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>refs<span class="token punctuation">.</span>form<span class="token punctuation">.</span><span class="token function">resetFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                    loading<span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+                
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">/**
+        * 编辑信息
+        */</span>
+        <span class="token function-variable function">onHandEdit</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">v</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token keyword">const</span> responseData <span class="token operator">=</span> v
+            responseData<span class="token punctuation">.</span>id <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>id 
+            <span class="token function">Edit</span><span class="token punctuation">(</span>responseData<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                    loading<span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+                <span class="token comment">//重置表单</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>refs<span class="token punctuation">.</span>form<span class="token punctuation">.</span><span class="token function">resetFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                    loading<span class="token operator">:</span><span class="token boolean">false</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">(</span>
+                <span class="token comment">// 老式写法</span>
+                <span class="token comment">// &lt;Form onFinish={this.onSubmit} labelCol={this.state.fromLayout.labelCol} wrapperCol={this.state.fromLayout.wrapperCol}&gt;&lt;/Form&gt;</span>
+                <span class="token comment">// es6扩展</span>
+                <span class="token operator">&lt;</span>Fragment<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>FormCom <span class="token operator">/</span><span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>Form 
+                    ref<span class="token operator">=</span><span class="token string">&quot;form&quot;</span>
+                    onFinish<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>onSubmit<span class="token punctuation">}</span>
+                    <span class="token punctuation">{</span><span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>fromLayout<span class="token punctuation">}</span> 
+                    initialValues<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>status<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>number<span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+                    <span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span>Form<span class="token punctuation">.</span>Item label<span class="token operator">=</span><span class="token string">&quot;部门名称&quot;</span> name<span class="token operator">=</span><span class="token string">&quot;name&quot;</span><span class="token operator">&gt;</span>
+                            <span class="token operator">&lt;</span>Input <span class="token operator">/</span><span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span><span class="token operator">/</span>Form<span class="token punctuation">.</span>Item<span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span>Form<span class="token punctuation">.</span>Item label<span class="token operator">=</span><span class="token string">&quot;人员熟量&quot;</span> name<span class="token operator">=</span><span class="token string">&quot;number&quot;</span><span class="token operator">&gt;</span>
+                            <span class="token operator">&lt;</span>InputNumber min<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span> max<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">100</span><span class="token punctuation">}</span>   <span class="token operator">/</span><span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span><span class="token operator">/</span>Form<span class="token punctuation">.</span>Item<span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span>Form<span class="token punctuation">.</span>Item label<span class="token operator">=</span><span class="token string">&quot;禁启用&quot;</span> name<span class="token operator">=</span><span class="token string">&quot;status&quot;</span><span class="token operator">&gt;</span>
+                            <span class="token operator">&lt;</span>Radio<span class="token punctuation">.</span>Group  <span class="token operator">&gt;</span>
+                                <span class="token operator">&lt;</span>Radio value<span class="token operator">=</span><span class="token punctuation">{</span><span class="token boolean">true</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>启用<span class="token operator">&lt;</span><span class="token operator">/</span>Radio<span class="token operator">&gt;</span>
+                                <span class="token operator">&lt;</span>Radio value<span class="token operator">=</span><span class="token punctuation">{</span><span class="token boolean">false</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>禁用<span class="token operator">&lt;</span><span class="token operator">/</span>Radio<span class="token operator">&gt;</span>
+                            <span class="token operator">&lt;</span><span class="token operator">/</span>Radio<span class="token punctuation">.</span>Group<span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span><span class="token operator">/</span>Form<span class="token punctuation">.</span>Item<span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span>Form<span class="token punctuation">.</span>Item label<span class="token operator">=</span><span class="token string">&quot;描述&quot;</span> name<span class="token operator">=</span><span class="token string">&quot;content&quot;</span><span class="token operator">&gt;</span>
+                            <span class="token operator">&lt;</span>Input<span class="token punctuation">.</span>TextArea <span class="token operator">/</span><span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span><span class="token operator">/</span>Form<span class="token punctuation">.</span>Item<span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span>Button loading<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>loading<span class="token punctuation">}</span> type<span class="token operator">=</span><span class="token string">&quot;primary&quot;</span> htmlType<span class="token operator">=</span><span class="token string">&quot;submit&quot;</span><span class="token operator">&gt;</span>提交<span class="token operator">&lt;</span><span class="token operator">/</span>Button<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span><span class="token operator">/</span>Form<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>Fragment<span class="token operator">&gt;</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">default</span> AddDepartment<span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="函数报错"><a href="#函数报错" class="header-anchor">#</a> 函数报错</h2> <img src="/My-notes/front/react/报错返回函数.jpg"> <h2 id="提取组件该怎么传参例"><a href="#提取组件该怎么传参例" class="header-anchor">#</a> 提取组件该怎么传参例:</h2> <div class="language-js extra-class"><pre class="language-js"><code>
+    <span class="token comment">//src\views\department\Add.js</span>
+    <span class="token comment">//源文件需要的东西</span>
+    <span class="token comment">//引入新建组件</span>
+    <span class="token keyword">import</span> FormCom <span class="token keyword">from</span><span class="token string">&quot;@c/form/Index&quot;</span><span class="token punctuation">;</span>
+     <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token operator">=</span><span class="token punctuation">{</span>
+           
+            formItem<span class="token operator">:</span><span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>type<span class="token operator">:</span><span class="token string">&quot;Input&quot;</span><span class="token punctuation">,</span> label<span class="token operator">:</span><span class="token string">&quot;部门名称&quot;</span><span class="token punctuation">,</span> name<span class="token operator">:</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">,</span>required<span class="token operator">:</span><span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>type<span class="token operator">:</span><span class="token string">&quot;Select&quot;</span><span class="token punctuation">,</span> label<span class="token operator">:</span><span class="token string">&quot;人员熟量&quot;</span><span class="token punctuation">,</span> name<span class="token operator">:</span><span class="token string">&quot;select&quot;</span><span class="token punctuation">,</span>required<span class="token operator">:</span><span class="token boolean">true</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> <span class="token punctuation">{</span>formItem<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state
+        <span class="token keyword">return</span><span class="token punctuation">(</span>
+             <span class="token operator">&lt;</span>FormCom formItem<span class="token operator">=</span><span class="token punctuation">{</span>formItem<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+</code></pre></div><ul><li>新文件</li></ul> <div class="language-js extra-class"><pre class="language-js"><code>
+    <span class="token keyword">import</span> React<span class="token punctuation">,</span><span class="token punctuation">{</span>Component<span class="token punctuation">,</span>Fragment<span class="token punctuation">}</span><span class="token keyword">from</span><span class="token string">&quot;react&quot;</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment">//ANTD</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Form<span class="token punctuation">,</span>Input<span class="token punctuation">,</span>Button<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;antd&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">class</span> <span class="token class-name">FormCom</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token punctuation">{</span>
+        <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//这里可以打印出来</span>
+        <span class="token punctuation">}</span>
+
+        
+        <span class="token comment">//初始化</span>
+        <span class="token function-variable function">initFormItem</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token keyword">const</span> <span class="token punctuation">{</span>formItem<span class="token punctuation">}</span> <span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">;</span>
+            <span class="token comment">//检测是否存在 FormItem</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>formItem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>formItem <span class="token operator">||</span> <span class="token punctuation">(</span>formItem <span class="token operator">&amp;&amp;</span> formItem<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token comment">//循环处理</span>
+            <span class="token keyword">const</span> formList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            formItem<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">&quot;Input&quot;</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    formList<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">inputElem</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">&quot;Select&quot;</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    formList<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">selectElem</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> formList
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>formList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+     
+        <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">(</span>
+                <span class="token operator">&lt;</span>Fragment<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>Form  ref<span class="token operator">=</span><span class="token string">&quot;form&quot;</span> onFinish<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>onSubmit<span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>fromLayout<span class="token punctuation">}</span>  initialValues<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>status<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>number<span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&gt;</span>
+                        <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">initFormItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+                        <span class="token operator">&lt;</span>Form<span class="token punctuation">.</span>Item<span class="token operator">&gt;</span>
+                            <span class="token operator">&lt;</span>Button loading<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>loading<span class="token punctuation">}</span> type<span class="token operator">=</span><span class="token string">&quot;primary&quot;</span> htmlType<span class="token operator">=</span><span class="token string">&quot;submit&quot;</span><span class="token operator">&gt;</span>提交<span class="token operator">&lt;</span><span class="token operator">/</span>Button<span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span><span class="token operator">/</span>Form<span class="token punctuation">.</span>Item<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span><span class="token operator">/</span>Form<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>Fragment<span class="token operator">&gt;</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">default</span> FormCom<span class="token punctuation">;</span>
+
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2021-01-07 09:40:48</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/My-notes/front/react/project_06.html" class="prev">
+        优化分离组件
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/My-notes/assets/js/app.015e7f34.js" defer></script><script src="/My-notes/assets/js/2.a0b16310.js" defer></script><script src="/My-notes/assets/js/36.0262a3d1.js" defer></script><script src="/My-notes/assets/js/3.d5588be5.js" defer></script>
+  </body>
+</html>
