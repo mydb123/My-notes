@@ -204,3 +204,12 @@ title: day一
         }
     }
 ```
+
+
+
+## 数组里有对象拼接值
+
+<img :src="$withBase('/others/recording/szpjz.jpg')">
+
+<img :src="$withBase('/others/recording/szpjz2.jpg')">
+
