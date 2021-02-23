@@ -213,3 +213,10 @@ title: day一
 
 <img :src="$withBase('/others/recording/szpjz2.jpg')">
 
+
+## 项目首页
+
+<img :src="$withBase('/others/recording/szpjz1.jpg')">
+
+<img :src="$withBase('/others/recording/szpjz2.jpg')">
+
