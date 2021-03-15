@@ -8,6 +8,7 @@ module.exports = [
             { text: 'WebAPI', link: '/front/webapi/' },
             { text: 'jQuery', link: '/front/jquery/' },
             { text: 'Vue', link: '/front/vue/' },
+            { text: 'Vue3', link: '/front/Vue3/' },
             { text: 'React', link: '/front/react/' },
             { text: 'ThreeJs', link: '/front/threejs/' }
         ]
