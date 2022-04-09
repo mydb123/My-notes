@@ -28,6 +28,6 @@
     "vuepress-plugin-auto-sidebar": "^1.4.1"
   },
   "dependencies": {
-    "moment": "^2.24.0"
+    "moment": "^2.29.2"
   }
 }
